@@ -1,8 +1,8 @@
-export default class niveau2_2_3 extends Phaser.Scene {
+export default class niveau2_3_3 extends Phaser.Scene {
     // constructeur de la classe
     constructor() {
       super({
-        key: "niveau2_2_3" //  ici on précise le nom de la classe en tant qu'identifiant
+        key: "niveau2_3_3" //  ici on précise le nom de la classe en tant qu'identifiant
       });
     }
     preload() {}
@@ -52,7 +52,7 @@ export default class niveau2_2_3 extends Phaser.Scene {
         }
         if (this.physics.overlap(this.player, this.porte_perdu)) {
           console.log("faux");
-          this.scene.switch("selection");
+          this.scene.switch("niveau2_1_1");
         }
       }
     }
