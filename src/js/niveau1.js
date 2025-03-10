@@ -32,14 +32,14 @@ export default class niveau1 extends Phaser.Scene {
     this.player = this.physics.add.sprite(100, 450, "img_perso");
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
-    
+
     this.clavier = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player, this.groupe_plateformes);
 
     /*************************
      *  CREATION DES BOUTEILLES  *
      **************************/
-    
+
     this.groupe_bouteilles = this.physics.add.group();
     this.positionsUtilisees = new Set(); //stocker les positions utilisées et éviter les collisions entre bouteilles
 
@@ -61,7 +61,21 @@ export default class niveau1 extends Phaser.Scene {
       fill: "#000" // couleur de texte
     });
 
-    
+    /*****************************************************
+   *  GESTION DES INTERATIONS ENTRE  GROUPES ET ELEMENTS *
+   ******************************************************/
+
+    //  Collide le joueur avec le groupe bouteilles
+    //this.physics.add.collider(this.player, this.groupe_bouteilles);
+
+    // si le player marche sur un élément de groupe_étoiles (c.-à-d. une bouteille) :
+    // on déclenche la function callback "collecter_etoile" avec en parametres les
+    // deux élement qui se sont superposés : le player, et l'étoile en question
+    // les actions à entreprendre seront écrites dans la fonction ramasserEtoile
+    this.physics.add.overlap(this.player, this.groupe_bouteilles, this.ramasserBouteille, null, this);
+
+
+
   }
 
   ajouterBouteille() {
@@ -69,7 +83,7 @@ export default class niveau1 extends Phaser.Scene {
     let largeurScene = this.scale.width; // Récupère la largeur de la scène
     let coordX;
 
-  
+
     do {
       coordX = Phaser.Math.Between(50, largeurScene - 50);
     } while (this.positionsUtilisees.has(coordX));
@@ -89,7 +103,31 @@ export default class niveau1 extends Phaser.Scene {
     });
   }
 
-  
+  /***********************************************************************/
+  /** FONCTION RAMASSERBOUTEILLE
+  /***********************************************************************/
+
+  /* la fonction ramasserEtoile est une fonction de callBack :
+   * elle est rappelée quand un player rencontre une bouteille de groupe_bouteilles
+   * a chaque appel, les parametres désignent le player et la bouteille en question
+   */
+  ramasserBouteille(un_player, une_bouteille) {
+    // Vérifie si la bouteille est de type "img_cristaline" ou "img_jack"
+    if (une_bouteille.texture.key === "img_cristaline") {
+      score += 2; // Augmente le score de 2 points
+    } else if (une_bouteille.texture.key === "img_jack") {
+      if (score !== 0){
+        score -= 1;// Diminue le score de 1 point
+      }
+    }
+    zone_texte_score.setText("Score : " + score); //changement du score
+    une_bouteille.destroy(); //destruction de la bouteille
+    
+    if (score === 10){
+      this.scene.switch("selection");
+    }
+  }
+
 
   update() {
     if (this.clavier.left.isDown) {
