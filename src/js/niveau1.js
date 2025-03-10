@@ -50,6 +50,18 @@ export default class niveau1 extends Phaser.Scene {
       callbackScope: this,// Pour que la fonction puisse accéder aux variables de la scène
       loop: true
     });
+
+    /*****************************
+   *  ZONE D'AFFICHAGE DU SCORE *
+   ******************************/
+
+    //  On définit une zone de texte pour afficher le score en haut a gauche
+    zone_texte_score = this.add.text(16, 16, "Score : 0", {
+      fontSize: "32px", // taille du texte
+      fill: "#000" // couleur de texte
+    });
+
+    
   }
 
   ajouterBouteille() {
