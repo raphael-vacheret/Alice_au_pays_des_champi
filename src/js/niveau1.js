@@ -2,10 +2,10 @@ import * as fct from "/src/js/fonctions.js";
 /***********************************************************************/
 /** VARIABLES GLOBALES 
 /***********************************************************************/
-//var eau;
-//var jack;
+
 var groupe_bouteilles; // contient tous les sprite etoiles
-//var hepar;
+var score = 0; // pour enregistrer le score
+var zone_texte_score;
 
 
 export default class niveau1 extends Phaser.Scene {
@@ -76,6 +76,8 @@ export default class niveau1 extends Phaser.Scene {
       this.positionsUtilisees.delete(coordX);
     });
   }
+
+  
 
   update() {
     if (this.clavier.left.isDown) {
