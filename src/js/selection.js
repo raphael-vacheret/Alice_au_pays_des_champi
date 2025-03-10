@@ -167,7 +167,7 @@ export default class selection extends Phaser.Scene {
       if (this.physics.overlap(player, this.porte1))
         this.scene.switch("niveau1");
       if (this.physics.overlap(player, this.porte2))
-        this.scene.switch("niveau2");
+        this.scene.switch("niveau2_1_1");
       if (this.physics.overlap(player, this.porte3))
         this.scene.switch("niveau3");
     }
