@@ -5,21 +5,38 @@ export default class niveau2_1_1 extends Phaser.Scene {
       key: "niveau2_1_1" //  ici on précise le nom de la classe en tant qu'identifiant
     });
   }
-  preload() {}
+  preload() {
+    this.load.image("tuile_1","scr/assets/arcenciel.png");
+    this.load.image("tuile_2", "src/assets/canabis-removedg-preview.png");
+    this.load.image("tuile_3", "src/assets/elephant.png");
+    this.load.image("tuile_4", "src/assets/Overlay_illumination.png");
+    this.load.image("tuile_5", "src/assets/unicorn-sprite_1.png");
+    this.load.image("tuile_6", "src/assets/unicorn-sprite_2.png");
+    this.load.image("tuile_7", "src/assets/unicorn-sprite_3.png");
+    this.load.tilemapTiledJSON("map", "src/assets/map_champi.json");
+  }
 
   create() {
     this.add.image(400, 300, "img_ciel");
     this.groupe_plateformes = this.physics.add.staticGroup();
     this.groupe_plateformes.create(200, 584, "img_plateforme");
     this.groupe_plateformes.create(600, 584, "img_plateforme");
+    const carteDuNiveau = this.add.tilemap("map");
+    const tileset = carteDuNiveau.addTilesetImage("tuile_2", "tuile_1", "tuile_3", "tuile_4", "tuile_5", "tuile_6", "tuile_7");
+    const calque1 = carteDuNiveau.createLayer("Calque de Tuiles 1", tileset);
+    const calque2 = carteDuNiveau.createLayer("Calque de Tuiles 2", tileset);
+    const calque3 = carteDuNiveau.createLayer("Calque de Tuiles 3", tileset);
+    calque2.setCollisionByProperty({ estSolide: true });
+    this.physics.add.collider(this.player, calque2);
+
     // ajout d'un texte distintcif  du niveau
     this.add.text(400, 100, "question 1", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
     });
 
-    this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte2");
-    this.porte_perdu = this.physics.add.staticSprite(700, 550, "img_porte3");
+    this.porte_retour = this.physics.add.staticSprite(100, 520, "img_porte4");
+    this.porte_perdu = this.physics.add.staticSprite(700, 520, "img_porte4");
 
 
     this.player = this.physics.add.sprite(100, 450, "img_perso");
