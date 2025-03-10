@@ -51,3 +51,12 @@ export default class niveau2 extends Phaser.Scene {
     }
   }
 }
+// question 1: les champignons c'est naturel, donc c'est bon pour la santé ? vrai/faux
+// question 2: combien de consomateurs de champignons sont morts en 2024 ?
+// question 3: combien de consomateurs de drogue devienne addictes ?
+// question 4: Comment réduire les risques liés à l’usage des champignons hallucinogènes ?
+// question 5: Quel est le principal danger des champignons hallucinogènes ?
+// question 6: combien de temps dure un cure de champignons hallucinogènes ?
+// question 7: Quels sont les risques de rechute après avoir arrêté les champignons hallucinogènes ?
+// question 8: combien de consomateurs finnisent en prison ?
+// question 9: combien de consomateurs finnisent en hopital ?
