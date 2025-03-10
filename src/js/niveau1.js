@@ -122,7 +122,7 @@ export default class niveau1 extends Phaser.Scene {
     }
     zone_texte_score.setText("Score : " + score); //changement du score
     une_bouteille.destroy(); //destruction de la bouteille
-    
+
     if (score === 10){
       this.scene.switch("selection");
     }
@@ -131,19 +131,25 @@ export default class niveau1 extends Phaser.Scene {
 
   update() {
     if (this.clavier.left.isDown) {
-      this.player.setVelocityX(-160);
-      this.player.anims.play("anim_tourne_gauche", true);
-    } else if (this.clavier.right.isDown) {
-      this.player.setVelocityX(160);
-      this.player.anims.play("anim_tourne_droite", true);
-    } else {
-      this.player.setVelocityX(0);
-      this.player.anims.play("anim_face");
-    }
+  // Définit une vitesse aléatoire négative pour la direction gauche
+  let randomSpeedLeft = Phaser.Math.Between(-200, -400); // Vitesse aléatoire entre -200 et -400
+  this.player.setVelocityX(randomSpeedLeft); 
+  this.player.anims.play("anim_tourne_gauche", true);
+} else if (this.clavier.right.isDown) {
+  // Définit une vitesse aléatoire positive pour la direction droite
+  let randomSpeedRight = Phaser.Math.Between(200, 400); // Vitesse aléatoire entre 200 et 400
+  this.player.setVelocityX(randomSpeedRight);
+  this.player.anims.play("anim_tourne_droite", true);
+} else {
+  this.player.setVelocityX(0);
+  this.player.anims.play("anim_face");
+}
 
-    if (this.clavier.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
-    }
+if (this.clavier.up.isDown && this.player.body.touching.down) {
+  // Définit une vitesse verticale aléatoire pour le saut
+  let randomSpeedUp = Phaser.Math.Between(-300, -500); // Vitesse aléatoire pour le saut
+  this.player.setVelocityY(randomSpeedUp);
+}
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space)) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
