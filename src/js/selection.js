@@ -27,8 +27,8 @@ export default class selection extends Phaser.Scene {
     this.load.image("img_ciel", "src/assets/sky.png");
     this.load.image("img_plateforme", "src/assets/platform.png");
     this.load.spritesheet("img_perso", "src/assets/perso1.png", {
-      frameWidth: 32,
-      frameHeight: 48
+      frameWidth: 46,
+      frameHeight: 66
     });
     this.load.image("img_porte1", "src/assets/door1.png");
     this.load.image("img_porte2", "src/assets/door2.png");
@@ -103,8 +103,8 @@ export default class selection extends Phaser.Scene {
     this.anims.create({
       key: "anim_tourne_gauche", // key est le nom de l'animation : doit etre unique poru la scene.
       frames: this.anims.generateFrameNumbers("img_perso", {
-        start: 11,
-        end: 6
+        start: 6,
+        end: 11
       }), // on prend toutes les frames de img perso numerotées de 0 à 3
       frameRate: 10, // vitesse de défilement des frames
       repeat: -1 // nombre de répétitions de l'animation. -1 = infini
