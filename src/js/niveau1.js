@@ -1,4 +1,11 @@
 import * as fct from "/src/js/fonctions.js";
+/***********************************************************************/
+/** VARIABLES GLOBALES 
+/***********************************************************************/
+var eau;
+var jack;
+//var hepar;
+
 
 export default class niveau1 extends Phaser.Scene {
   // constructeur de la classe
@@ -8,6 +15,9 @@ export default class niveau1 extends Phaser.Scene {
     });
   }
   preload() {
+    this.load.image("img_cristaline", "src/assets/cristaline.png");
+    this.load.image("img_jack", "src/assets/jack.png");
+    //this.load.image("img_hepar", "src/assets/hepar.png");
   }
 
   create() {
@@ -32,6 +42,19 @@ export default class niveau1 extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.clavier = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player, this.groupe_plateformes);
+
+    //création bouteilles qui tombent
+    this.eau = this.physics.add.sprite(300, 450, "img_cristaline");
+    this.eau.setCollideWorldBounds(true);
+    this.physics.add.collider(this.eau, this.groupe_plateformes);
+
+    this.jack = this.physics.add.sprite(400, 450, "img_jack");
+    this.jack.setCollideWorldBounds(true);
+    this.physics.add.collider(this.jack, this.groupe_plateformes);
+
+    //this.hepar = this.physics.add.sprite(500, 450, "img_hepar");
+    //this.hepar.setCollideWorldBounds(true);
+    //this.physics.add.collider(this.hepar, this.groupe_plateformes);
   }
 
   update() {
