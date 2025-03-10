@@ -166,7 +166,7 @@ export default class selection extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
       if (this.physics.overlap(player, this.porte1))
         this.scene.switch("niveau1");
-        this.porte1.destroy(); // on destroy la porte pour ne pas y retourner
+        //this.porte1.destroy(); // on destroy la porte pour ne pas y retourner
       if (this.physics.overlap(player, this.porte2))
         this.scene.switch("niveau2_1_1");
       if (this.physics.overlap(player, this.porte3))
