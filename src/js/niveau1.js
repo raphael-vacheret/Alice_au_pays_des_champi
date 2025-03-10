@@ -14,14 +14,18 @@ export default class niveau1 extends Phaser.Scene {
   }
 
   preload() {
+    this.load.image("img_bar", "src/assets/bar2.png");
     this.load.image("img_cristaline", "src/assets/cristaline.png");
     this.load.image("img_jack", "src/assets/jack.png");
   }
 
   create() {
     console.log("Scène niveau1 créée"); // Vérifier que la scène est bien chargée
+    let image = this.add.image(this.scale.width / 2, this.scale.height / 2, "img_bar");
+    image.setDisplaySize(this.scale.width, this.scale.height);
+    image.setTint(0x444444); // Applique une teinte plus sombre 0x777777
 
-    this.add.image(400, 300, "img_ciel");
+    //this.add.image(400, 300, "img_bar");
 
     this.groupe_plateformes = this.physics.add.staticGroup();
     this.groupe_plateformes.create(200, 584, "img_plateforme");
@@ -58,7 +62,7 @@ export default class niveau1 extends Phaser.Scene {
     //  On définit une zone de texte pour afficher le score en haut a gauche
     zone_texte_score = this.add.text(16, 16, "Score : 0", {
       fontSize: "32px", // taille du texte
-      fill: "#000" // couleur de texte
+      fill: "#FFF" // couleur de texte
     });
 
     /*****************************************************
@@ -114,7 +118,11 @@ export default class niveau1 extends Phaser.Scene {
   ramasserBouteille(un_player, une_bouteille) {
     // Vérifie si la bouteille est de type "img_cristaline" ou "img_jack"
     if (une_bouteille.texture.key === "img_cristaline") {
-      score += 2; // Augmente le score de 2 points
+      if (score === 9){
+        score += 1; //pour pas que le score soit de 11 si on est déjà à 9
+      }else{
+        score += 2; // Augmente le score de 2 points
+      }
     } else if (une_bouteille.texture.key === "img_jack") {
       if (score !== 0){
         score -= 1;// Diminue le score de 1 point
@@ -131,25 +139,21 @@ export default class niveau1 extends Phaser.Scene {
 
   update() {
     if (this.clavier.left.isDown) {
-  // Définit une vitesse aléatoire négative pour la direction gauche
-  let randomSpeedLeft = Phaser.Math.Between(-200, -400); // Vitesse aléatoire entre -200 et -400
-  this.player.setVelocityX(randomSpeedLeft); 
-  this.player.anims.play("anim_tourne_gauche", true);
-} else if (this.clavier.right.isDown) {
-  // Définit une vitesse aléatoire positive pour la direction droite
-  let randomSpeedRight = Phaser.Math.Between(200, 400); // Vitesse aléatoire entre 200 et 400
-  this.player.setVelocityX(randomSpeedRight);
-  this.player.anims.play("anim_tourne_droite", true);
-} else {
-  this.player.setVelocityX(0);
-  this.player.anims.play("anim_face");
-}
+      this.player.setVelocityX(-300);
+      this.player.anims.play("anim_tourne_gauche", true);
+    } else if (this.clavier.right.isDown) {
+      this.player.setVelocityX(300);
+      this.player.anims.play("anim_tourne_droite", true);
+    } else {
+      this.player.setVelocityX(0);
+      this.player.anims.play("anim_face");
+    }
 
-if (this.clavier.up.isDown && this.player.body.touching.down) {
-  // Définit une vitesse verticale aléatoire pour le saut
-  let randomSpeedUp = Phaser.Math.Between(-300, -500); // Vitesse aléatoire pour le saut
-  this.player.setVelocityY(randomSpeedUp);
-}
+    
+    if (this.clavier.up.isDown && this.player.body.touching.down) {
+      this.player.setVelocityY(-330);
+    }
+    
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space)) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
