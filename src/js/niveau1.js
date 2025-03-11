@@ -17,19 +17,29 @@ export default class niveau1 extends Phaser.Scene {
     this.load.image("img_bar", "src/assets/bar2.png");
     this.load.image("img_cristaline", "src/assets/cristaline.png");
     this.load.image("img_jack", "src/assets/jack.png");
+    this.load.image("img_rectangle", "src/assets/rectangle.png");
   }
 
   create() {
     console.log("Scène niveau1 créée"); // Vérifier que la scène est bien chargée
+    //let image = this.add.image(this.scale.width / 2, this.scale.height / 2, "img_bar");
+
+// Calcul du facteur d’échelle pour garder les proportions
+//let scaleX = this.scale.width / 1612;
+//let scaleY = this.scale.height / 980;
+//let scale = Math.max(scaleX, scaleY); // Assure que l’image couvre tout l’écran
+
+//image.setScale(scale);
     let image = this.add.image(this.scale.width / 2, this.scale.height / 2, "img_bar");
     image.setDisplaySize(this.scale.width, this.scale.height);
-    image.setTint(0x444444); // Applique une teinte plus sombre 0x777777
+    image.setTint(0x777777); // Applique une teinte plus sombre 0x777777 0x444444
 
     //this.add.image(400, 300, "img_bar");
 
     this.groupe_plateformes = this.physics.add.staticGroup();
-    this.groupe_plateformes.create(200, 584, "img_plateforme");
-    this.groupe_plateformes.create(600, 584, "img_plateforme");
+    this.groupe_plateformes.create(200, 584, "img_rectangle");
+    this.groupe_plateformes.create(627, 584, "img_rectangle");
+    this.groupe_plateformes.create(1054, 584, "img_rectangle");
 
     this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte1");
 
