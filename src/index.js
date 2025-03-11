@@ -15,7 +15,7 @@ import niveau3 from "/src/js/niveau3.js";
 // configuration générale du jeu
 var config = {
   type: Phaser.AUTO,
-  width: 1200, // largeur en pixels
+  width: 1250, // largeur en pixels
   height: 625, // hauteur en pixels
    scale: {
         // Or set parent divId here
