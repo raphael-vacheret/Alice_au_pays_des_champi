@@ -21,11 +21,17 @@ export default class niveau2_1_1 extends Phaser.Scene {
     this.groupe_plateformes = this.physics.add.staticGroup();
     this.groupe_plateformes.create(200, 584, "img_plateforme");
     this.groupe_plateformes.create(600, 584, "img_plateforme");
-    const carteDuNiveau = this.add.tilemap("map");
-    const tileset = carteDuNiveau.addTilesetImage("tuile_2", "tuile_1", "tuile_3", "tuile_4", "tuile_5", "tuile_6", "tuile_7");
-    const calque1 = carteDuNiveau.createLayer("Calque de Tuiles 1", tileset);
-    const calque2 = carteDuNiveau.createLayer("Calque de Tuiles 2", tileset);
-    const calque3 = carteDuNiveau.createLayer("Calque de Tuiles 3", tileset);
+    const map = this.add.tilemap("map");
+    const tuile1 = map.addTilesetImage("tuile_1", "arc_en_ciel+_-removedg-preview");
+    const tuile2 = map.addTilesetImage("tuile_2", "canabis-removedg-preview");
+    const tuile3 = map.addTilesetImage("tuile_3", "elephant");
+    const tuile4 = map.addTilesetImage("tuile_4", "Overlay_illumination");
+    const tuile5 = map.addTilesetImage("tuile_5", "unicorn-sprite_1");
+    const tuile6 = map.addTilesetImage("tuile_6", "unicorn-sprite_2");
+    const tuile7 = map.addTilesetImage("tuile_7", "unicorn-sprite_3");
+    const calque1 = map.createdynamicLayer("Calque de Tuiles 1", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
+    const calque2 = map.createdynamicLayer("Calque de Tuiles 2", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
+    const calque3 = map.createdynamicLayer("Calque de Tuiles 3", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
     calque2.setCollisionByProperty({ estSolide: true });
     this.physics.add.collider(this.player, calque2);
 
