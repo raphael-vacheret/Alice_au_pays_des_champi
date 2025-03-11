@@ -33,7 +33,7 @@ export default class selection extends Phaser.Scene {
     this.load.image("img_porte1", "src/assets/door1.png");
     this.load.image("img_porte2", "src/assets/door2.png");
     this.load.image("img_porte3", "src/assets/door3.png");
-    this.load.image("img_porte4", "src/assets/porteNv_2.png");
+    this.load.image("img_porte4", "src/assets/porte_rose.png");
   }
 
   /***********************************************************************/
