@@ -7,8 +7,6 @@ var groupe_bouteilles; // contient tous les sprite etoiles
 var score = 0; // pour enregistrer le score
 var zone_texte_score;
 var bad_score = 0;
-var random = 1;
-var direction = 1;
 
 export default class niveau1 extends Phaser.Scene {
   constructor() {
@@ -51,6 +49,8 @@ export default class niveau1 extends Phaser.Scene {
 
     this.clavier = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player, this.groupe_plateformes);
+    this.random = 1; // Valeur par défaut
+    this.direction = 1; // Valeur par défaut
 
     /*************************
      *  CREATION DES BOUTEILLES  *
@@ -67,7 +67,7 @@ export default class niveau1 extends Phaser.Scene {
       loop: true
     });
     this.time.addEvent({
-      delay: 2500, // Une nouvelle bouteille toutes les seconde
+      delay: 1500, // Une nouvelle bouteille toutes les seconde
       callback: this.aleatoire, // Appelle la fonction ajouterBouteille
       callbackScope: this,// Pour que la fonction puisse accéder aux variables de
       loop: true,
@@ -100,11 +100,9 @@ export default class niveau1 extends Phaser.Scene {
 
 
   }
-  aleatoire(random, direction) {
-    random = Phaser.Math.FloatBetween(0.5, 2); // Valeur entre 0.5 et 2
-    direction = Phaser.Math.RND.sign(); // Retourne -1 ou 1
-
-    return { random, direction };
+  aleatoire() {
+    this.random = Phaser.Math.FloatBetween(0.5, 1.5); // Valeur entre 0.5 et 2
+    this.direction = Phaser.Math.RND.sign(); // Retourne -1 ou 1
   }
 
   ajouterBouteille() {
@@ -204,13 +202,13 @@ export default class niveau1 extends Phaser.Scene {
     }
     if (bad_score >= 2) {
       if (this.clavier.left.isDown) {
-        this.player.setVelocityX(300 *random);
+        this.player.setVelocityX(300 *this.random);
         this.player.anims.play("anim_tourne_gauche", true);
       } else if (this.clavier.right.isDown) {
-        this.player.setVelocityX(-300 * random);
+        this.player.setVelocityX(-300 * this.random);
         this.player.anims.play("anim_tourne_droite", true);
       } else {
-        this.player.setVelocityX(25 * direction);
+        this.player.setVelocityX(25 * this.direction);
         this.player.anims.play("anim_face");
       }
 
@@ -218,6 +216,9 @@ export default class niveau1 extends Phaser.Scene {
       if (this.clavier.up.isDown && this.player.body.touching.down) {
         this.player.setVelocityY(-330);
       }
+    }
+    if (bad_score >= 3) {
+      this.player.postFX.addBlur(4); // Applique un flou de force 8
     }
 
 
