@@ -20,30 +20,43 @@ export default class niveau2_1_1 extends Phaser.Scene {
     this.groupe_plateformes = this.physics.add.staticGroup();
     const map = this.add.tilemap("map");
     const tuile1 = map.addTilesetImage("arc_en_ciel+_-removebg-preview", "tuile_1");
-    const tuile2 = map.addTilesetImage("canabis-removedg-preview", "tuile_2");
+    const tuile2 = map.addTilesetImage("canabis-removebg-preview", "tuile_2");
     const tuile3 = map.addTilesetImage("elephant","tuile_3");
     const tuile4 = map.addTilesetImage("Overlay_illumination", "tuile_4");
     const tuile5 = map.addTilesetImage("unicorn-sprite_1", "tuile_5");
     const tuile6 = map.addTilesetImage("unicorn-sprite_2", "tuile_6");
     const tuile7 = map.addTilesetImage("unicorn-sprite_3", "tuile_7");
     const calque1 = map.createLayer("Calque de Tuiles 1", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
-    const calque2 = map.createLayer("Calque de Tuiles 2", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
     const calque3 = map.createLayer("Calque de Tuiles 3", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
+    const calque2 = map.createLayer("Calque de Tuiles 2", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
     calque2.setCollisionByProperty({ estSolide: true });
     
     
 
     // ajout d'un texte distintcif  du niveau
-    this.add.text(400, 100, "question 1", {
+    this.add.text(250, 100, "combien de consomateurs de champignons sont morts en 2024 ?", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
-    });
+    }).setOrigin(0.5, 0.5);
+    this.add.text(350, 400, "a) 0", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(900, 300, "c) 1500", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(700, 300, "b) 250", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
 
     this.porte_retour = this.physics.add.staticSprite(350, 496, "img_porte4");
     this.porte_perdu = this.physics.add.staticSprite(900, 496, "img_porte4");
+    this.porte_3 = this.physics.add.staticSprite(600, 496, "img_porte4");
 
 
-    this.player = this.physics.add.sprite(100, 450, "img_perso");
+    this.player = this.physics.add.sprite(550, 450, "img_perso");
     this.player.refreshBody();
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
@@ -69,6 +82,10 @@ export default class niveau2_1_1 extends Phaser.Scene {
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
+        console.log("vrai");
+        this.scene.switch("selection");
+      }
+      if (this.physics.overlap(this.player, this.porte_3)) {
         console.log("vrai");
         this.scene.switch("selection");
       }
