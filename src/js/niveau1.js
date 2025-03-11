@@ -100,9 +100,9 @@ export default class niveau1 extends Phaser.Scene {
 
 
   }
-  aleatoire() {
-    let random = Phaser.Math.FloatBetween(0.5, 2); // Valeur entre 0.5 et 2
-    let direction = Phaser.Math.RND.sign(); // Retourne -1 ou 1
+  aleatoire(random, direction) {
+    random = Phaser.Math.FloatBetween(0.5, 2); // Valeur entre 0.5 et 2
+    direction = Phaser.Math.RND.sign(); // Retourne -1 ou 1
 
     return { random, direction };
   }
@@ -146,8 +146,9 @@ export default class niveau1 extends Phaser.Scene {
     if (une_bouteille.texture.key === "img_jack") {
       if (score !== 0) {
         score -= 1;// Diminue le score de 1 point
-        bad_score += 1;
+        
       }
+      bad_score += 1;
     }
     if (une_bouteille.texture.key === "img_cristaline") {
       if (score === 9) {
@@ -167,7 +168,6 @@ export default class niveau1 extends Phaser.Scene {
 
 
   update() {
-    console.log(random);
     if (bad_score == 0) {
       if (this.clavier.left.isDown) {
         this.player.setVelocityX(-300);
@@ -204,7 +204,7 @@ export default class niveau1 extends Phaser.Scene {
     }
     if (bad_score >= 2) {
       if (this.clavier.left.isDown) {
-        this.player.setVelocityX(300 * random);
+        this.player.setVelocityX(300 *random);
         this.player.anims.play("anim_tourne_gauche", true);
       } else if (this.clavier.right.isDown) {
         this.player.setVelocityX(-300 * random);
