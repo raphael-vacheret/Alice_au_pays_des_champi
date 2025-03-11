@@ -34,26 +34,26 @@ export default class niveau2_1_1 extends Phaser.Scene {
     
 
     // ajout d'un texte distintcif  du niveau
-    this.add.text(250, 100, "combien de consomateurs de champignons sont morts en 2024 ?", {
+    this.add.text(600, 300, "Combien de consomateurs de champignons sont morts en 2024 ?", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
     }).setOrigin(0.5, 0.5);
-    this.add.text(350, 400, "a) 0", {
+    this.add.text(350, 415, "a) 0", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
     }).setOrigin(0.5, 0.5);
-    this.add.text(900, 300, "c) 1500", {
+    this.add.text(900, 415, "c) 1500", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
     }).setOrigin(0.5, 0.5);
-    this.add.text(700, 300, "b) 250", {
+    this.add.text(625, 415, "b) 250", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
       fontSize: "22pt"
     }).setOrigin(0.5, 0.5);
 
     this.porte_retour = this.physics.add.staticSprite(350, 496, "img_porte4");
     this.porte_perdu = this.physics.add.staticSprite(900, 496, "img_porte4");
-    this.porte_3 = this.physics.add.staticSprite(600, 496, "img_porte4");
+    this.porte_3 = this.physics.add.staticSprite(625, 496, "img_porte4");
 
 
     this.player = this.physics.add.sprite(550, 450, "img_perso");
@@ -83,25 +83,27 @@ export default class niveau2_1_1 extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
         console.log("vrai");
-        this.scene.switch("selection");
+        this.scene.switch("niveau2_1_2");
       }
       if (this.physics.overlap(this.player, this.porte_3)) {
         console.log("vrai");
-        this.scene.switch("selection");
+        this.scene.switch("niveau2_1_2");
       }
       if (this.physics.overlap(this.player, this.porte_perdu)) {
         console.log("faux");
-        this.scene.switch("niveau2_1_2");
+        this.scene.switch("selection");
       }
     }
   }
 }
-// question 1: les champignons c'est naturel, donc c'est bon pour la santé ? vrai/faux
-// question 2: combien de consomateurs de champignons sont morts en 2024 ?
-// question 3: combien de consomateurs de drogue devienne addictes ?
-// question 4: Comment réduire les risques liés à l’usage des champignons hallucinogènes ?
+// question 1: les champignons c'est naturel, donc c'est bon pour la santé ? vrai/faux --
+// question 2: combien de consomateurs de champignons sont morts en 2024 ? ++
+// question 3: combien de consomateurs de drogue devienne addictes ? ++
+// question 4: Comment réduire les risques liés à l’usage des champignons hallucinogènes ? 
+
 // question 5: Quel est le principal danger des champignons hallucinogènes ?
-// question 6: combien de temps dure un cure de champignons hallucinogènes ?
-// question 7: Quels sont les risques de rechute après avoir arrêté les champignons hallucinogènes ?
-// question 8: combien de consomateurs finnisent en prison ?
-// question 9: combien de consomateurs finnisent en hopital ?
+// question 6: combien de temps dure un cure de champignons hallucinogènes ? ++
+// question 7: Quels sont les risques de rechute après avoir arrêté les champignons hallucinogènes ? --
+
+// question 8: combien de consomateurs finnisent en prison ? 
+// question 9: combien de consomateurs finnisent en hopital ? --

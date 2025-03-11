@@ -30,13 +30,29 @@ export default class niveau2_2_3 extends Phaser.Scene {
     const calque2 = map.createLayer("Calque de Tuiles 2", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
     const calque3 = map.createLayer("Calque de Tuiles 3", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
     calque2.setCollisionByProperty({ estSolide: true });
-      this.add.text(400, 100, "question 3", {
-        fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
-        fontSize: "22pt"
-      });
-  
+      
+    // ajout d'un texte distintcif  du niveau
+    this.add.text(600, 300, "Combien de consomateurs finnisent en hopital ?", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(350, 415, "a) 17", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(900, 415, "c) 22", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(625, 415, "b) 12", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+
+
       this.porte_retour = this.physics.add.staticSprite(350, 496, "img_porte4");
       this.porte_perdu = this.physics.add.staticSprite(900, 496, "img_porte4");
+      this.porte_3 = this.physics.add.staticSprite(625, 496, "img_porte4");
   
   
       this.player = this.physics.add.sprite(550, 450, "img_perso");
@@ -67,6 +83,10 @@ export default class niveau2_2_3 extends Phaser.Scene {
         if (this.physics.overlap(this.player, this.porte_retour)) {
           console.log("vrai");
           this.scene.switch("selection");
+        }
+        if (this.physics.overlap(this.player, this.porte_3)) {
+          console.log("vrai");
+          this.scene.switch("niveau2_3_1");
         }
         if (this.physics.overlap(this.player, this.porte_perdu)) {
           console.log("faux");

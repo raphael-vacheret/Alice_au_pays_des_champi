@@ -30,13 +30,24 @@ export default class niveau2_1_3 extends Phaser.Scene {
       const calque2 = map.createLayer("Calque de Tuiles 2", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
       const calque3 = map.createLayer("Calque de Tuiles 3", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
       calque2.setCollisionByProperty({ estSolide: true });
-      this.add.text(400, 100, "question 3", {
-        fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
-        fontSize: "22pt"
-      });
-  
-      this.porte_retour = this.physics.add.staticSprite(350, 496, "img_porte4");
-      this.porte_perdu = this.physics.add.staticSprite(900, 496, "img_porte4");
+          // ajout d'un texte distintcif  du niveau
+
+    this.add.text(600, 300, "Les champignons c'est naturel, donc c'est bon pour la santé ?", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(450, 415, "a) vrai", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(800, 415, "b) faux", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    
+
+      this.porte_retour = this.physics.add.staticSprite(450, 496, "img_porte4");
+      this.porte_perdu = this.physics.add.staticSprite(800, 496, "img_porte4");
   
   
       this.player = this.physics.add.sprite(550, 450, "img_perso");
@@ -66,11 +77,11 @@ export default class niveau2_1_3 extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
         if (this.physics.overlap(this.player, this.porte_retour)) {
           console.log("vrai");
-          this.scene.switch("selection");
+          this.scene.switch("niveau2_2_1");
         }
         if (this.physics.overlap(this.player, this.porte_perdu)) {
           console.log("faux");
-          this.scene.switch("niveau2_2_1");
+          this.scene.switch("selection");
         }
       }
     }

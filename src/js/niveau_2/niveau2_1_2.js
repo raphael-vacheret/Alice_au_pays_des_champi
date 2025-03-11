@@ -30,14 +30,29 @@ export default class niveau2_1_2 extends Phaser.Scene {
       const calque2 = map.createLayer("Calque de Tuiles 2", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
       const calque3 = map.createLayer("Calque de Tuiles 3", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
       calque2.setCollisionByProperty({ estSolide: true });
-      this.add.text(400, 100, "question 2", {
-        fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
-        fontSize: "22pt"
-      });
+
+
+      // ajout d'un texte distintcif  du niveau
+    this.add.text(600, 300, "Quel est le principal danger des champignons hallucinogènes ?", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(350, 415, "a) troubles psy", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(900, 415, "c) euphorie", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
+    this.add.text(625, 415, "b) intelligence", {
+      fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+      fontSize: "22pt"
+    }).setOrigin(0.5, 0.5);
   
       this.porte_retour = this.physics.add.staticSprite(350, 496, "img_porte4");
       this.porte_perdu = this.physics.add.staticSprite(900, 496, "img_porte4");
-  
+      this.porte_3 = this.physics.add.staticSprite(625, 496, "img_porte4");
   
       this.player = this.physics.add.sprite(550, 450, "img_perso");
       this.player.refreshBody();
@@ -67,6 +82,10 @@ export default class niveau2_1_2 extends Phaser.Scene {
         if (this.physics.overlap(this.player, this.porte_retour)) {
           console.log("vrai");
           this.scene.switch("selection");
+        }
+        if (this.physics.overlap(this.player, this.porte_3)) {
+          console.log("vrai");
+          this.scene.switch("niveau2_1_3");
         }
         if (this.physics.overlap(this.player, this.porte_perdu)) {
           console.log("faux");
