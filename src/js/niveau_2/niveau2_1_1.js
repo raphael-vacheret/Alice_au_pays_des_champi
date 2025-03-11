@@ -60,7 +60,7 @@ export default class niveau2_1_1 extends Phaser.Scene {
     this.player.refreshBody();
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
-    this.physics.add.collider(this.player, calque2);
+    this.physics.add.collider(this.player, calque2); //mettre ça
     this.clavier = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player, this.groupe_plateformes);
   }
