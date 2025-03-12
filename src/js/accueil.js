@@ -19,7 +19,7 @@ export default class accueil extends Phaser.Scene {
         
         let playButton = this.add.image(630, 350, 'bouton_play').setInteractive();
         playButton.on('pointerdown', () => {
-            this.scene.switch('niveau2_1_1');
+            this.scene.switch('selection');
         });
         
         let rulesButton = this.add.image(1175, 550, 'bouton_regles').setInteractive();

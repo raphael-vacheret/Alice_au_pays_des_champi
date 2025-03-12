@@ -1,3 +1,4 @@
+var coord_finale;
 export default class niveau3 extends Phaser.Scene {
   constructor() {
     super({
@@ -72,11 +73,25 @@ export default class niveau3 extends Phaser.Scene {
         this.physics.add.collider(this.player, obstacle, () => {
             if (obstacleType === 0) {
               //diminuer la largeur du player si brocoli
-              this.player.setDisplaySize(this.player.displayWidth * 0.9, this.player.displayHeight);  
+              this.player.setDisplaySize(this.player.displayWidth * 0.9, this.player.displayHeight);
+
             } else {
               if (this.player.displayWidth > 378){
-                this.player.setVelocityX(0);
 
+                this.cameras.main.stopFollow();
+
+                let centerX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
+                let centerY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
+
+                this.add.text(centerX-250, centerY-6, "Perdu, t'es trop gros, va faire du cardio !", {
+                  fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+                  fontSize: "22pt" 
+
+              });
+
+              this.time.delayedCall(3000, () => {
+                this.scene.switch("selection");// Remplace par l'URL de destination
+            }, [], this)
 
               }
               //augmenter la largeur du player si burger
@@ -90,9 +105,10 @@ export default class niveau3 extends Phaser.Scene {
 
   update() { 
     if (this.clavier.up.isDown && this.player.body.blocked.down){
-      this.player.setVelocityY(-350);
+      this.player.setVelocityY(-500);
     }else {
-      this.player.setVelocityX(400);
+      this.player.setVelocityX(500);
+      this.player.setGravity(400);
       this.player.anims.play("anim_tourne_droite", true);
     }
 
