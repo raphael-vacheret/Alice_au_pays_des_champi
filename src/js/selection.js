@@ -26,15 +26,26 @@ export default class selection extends Phaser.Scene {
     // tous les assets du jeu sont placés dans le sous-répertoire src/assets/
     this.load.image("img_ciel", "src/assets/sky.png");
     this.load.image("img_plateforme", "src/assets/platform.png");
+
     this.load.spritesheet("img_perso", "src/assets/perso1.png", {
       frameWidth: 46,
       frameHeight: 66
     });
+    
     this.load.image("img_porte1", "src/assets/alcool_porte.png");
     this.load.image("img_porte2", "src/assets/champi_porte.png");
     this.load.image("img_porte3", "src/assets/burger_porte.png");
     this.load.image("img_porte4", "src/assets/porte_rose.png");
     this.load.image("img_porte5", "src/assets/casino.png");
+
+    // chargement tuiles de jeu
+    this.load.image("Phaser_tuilesdejeu1", "src/assets/Tileset.png");
+    this.load.image("Phaser_tuilesdejeu2", "src/assets/Tileset2.png");
+    this.load.image("Phaser_tuilesdejeu3", "src/assets/GUI.png");
+    this.load.image("Phaser_traps", "src/assets/Traps_1-removebg-preview.png");
+
+    // chargement de la carte
+    this.load.tilemapTiledJSON("carte", "src/assets/mapJeu.json"); 
   }
 
   /***********************************************************************/
@@ -51,39 +62,84 @@ export default class selection extends Phaser.Scene {
       fct.doNothing();
       fct.doAlsoNothing();
 
+
+
+    // chargement de la carte
+    const carteDuNiveau = this.add.tilemap("carte");
+
+    // chargement du jeu de tuiles
+    const tileset1 = carteDuNiveau.addTilesetImage(
+          "Tileset",
+          "Phaser_tuilesdejeu1"
+        ); 
+    // chargement du jeu de tuiles
+    const tileset2 = carteDuNiveau.addTilesetImage(
+          "Tileset2",
+          "Phaser_tuilesdejeu2"
+        ); 
+    const tileset3 = carteDuNiveau.addTilesetImage(
+          "GUI",
+          "Phaser_tuilesdejeu3"
+        ); 
+    // chargement du jeu de tuiles
+    const tileset4 = carteDuNiveau.addTilesetImage(
+          "Traps_1-removebg-preview",
+          "Phaser_traps"
+        ); 
+
+
+
+    // chargement du calque calque_background
+    const calque_background = carteDuNiveau.createLayer(
+          "calque_background",
+          [tileset1,
+          tileset2,
+          tileset3,
+          tileset4]
+        );
+
+    // chargement du calque calque_plateforme
+    const calque_plateformes = carteDuNiveau.createLayer(
+          "calque_plateformes",
+          [tileset1,
+          tileset2,
+          tileset3,
+          tileset4]
+          
+        );
+
+    // chargement du calque calque_traps
+    const calque_traps = carteDuNiveau.createLayer(
+          "calque_traps",
+          [tileset1,
+          tileset2,
+          tileset3,
+          tileset4]
+        ); 
+
+
     /*************************************
      *  CREATION DU MONDE + PLATEFORMES  *
      *************************************/
 
     // On ajoute une simple image de fond, le ciel, au centre de la zone affichée (400, 300)
     // Par défaut le point d'ancrage d'une image est le centre de cette derniere
-    this.add.image(400, 300, "img_ciel");
+    //this.add.image(400, 300, "img_ciel");
 
     // la création d'un groupes permet de gérer simultanément les éléments d'une meme famille
     //  Le groupe groupe_plateformes contiendra le sol et deux platesformes sur lesquelles sauter
     // notez le mot clé "staticGroup" : le static indique que ces élements sont fixes : pas de gravite,
     // ni de possibilité de les pousser.
-    groupe_plateformes = this.physics.add.staticGroup();
-    // une fois le groupe créé, on va créer les platesformes , le sol, et les ajouter au groupe groupe_plateformes
-
-    // l'image img_plateforme fait 400x32. On en met 2 à coté pour faire le sol
-    // la méthode create permet de créer et d'ajouter automatiquement des objets à un groupe
-    // on précise 2 parametres : chaque coordonnées et la texture de l'objet, et "voila!"
-    groupe_plateformes.create(200, 584, "img_plateforme");
-    groupe_plateformes.create(600, 584, "img_plateforme");
-
-    //  on ajoute 3 platesformes flottantes
-    groupe_plateformes.create(600, 450, "img_plateforme");
-    groupe_plateformes.create(50, 300, "img_plateforme");
-    groupe_plateformes.create(750, 270,   "img_plateforme");
+  
+    
 
     /****************************
      *  Ajout des portes   *
      ****************************/
-    this.porte1 = this.physics.add.staticSprite(600, 414, "img_porte1");
-    this.porte2 = this.physics.add.staticSprite(50, 264, "img_porte2");
+    this.porte1 = this.physics.add.staticSprite(600, 500, "img_porte1");
+    this.porte2 = this.physics.add.staticSprite(100, 550, "img_porte2");
     this.porte3 = this.physics.add.staticSprite(50, 550, "img_porte3");
-    this.porte4 = this.physics.add.staticSprite(400, 550, "img_porte5");
+    this.porte4 = this.physics.add.staticSprite(400, 525, "img_porte5");
 
     /****************************
      *  CREATION DU PERSONNAGE  *
@@ -141,8 +197,26 @@ export default class selection extends Phaser.Scene {
      *  GESTION DES INTERATIONS ENTRE  GROUPES ET ELEMENTS *
      ******************************************************/
 
-    //  Collide the player and the groupe_etoiles with the groupe_plateformes
-    this.physics.add.collider(player, groupe_plateformes);
+    //  Collide the player with the groupe_plateformes
+    //this.physics.add.collider(player, groupe_plateformes);
+
+
+    // définition des tuiles de plateformes qui sont solides
+    // utilisation de la propriété estSolide
+    calque_plateformes.setCollisionByProperty({ estSolide: true }); 
+    calque_background.setCollisionByProperty({ estSolide: true }); 
+
+    // ajout d'une collision entre le joueur et le calque plateformes
+    this.physics.add.collider(player, calque_plateformes); 
+    this.physics.add.collider(player, calque_background);
+    
+
+    // redimentionnement du monde avec les dimensions calculées via tiled
+    this.physics.world.setBounds(0, 0, 8000, 640);
+    //  ajout du champs de la caméra de taille identique à celle du monde
+    this.cameras.main.setBounds(0, 0, 8000, 640);
+    // ancrage de la caméra sur le joueur
+    this.cameras.main.startFollow(player); 
   }
 
   /***********************************************************************/
