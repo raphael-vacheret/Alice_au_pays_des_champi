@@ -240,39 +240,12 @@ export default class selection extends Phaser.Scene {
 
   update() {
     
-        // chargement du calque calque_background
-        const calque_background = carteDuNiveau.createLayer(
-          "calque_background",
-          [tileset1,
-          tileset2,
-          tileset3,
-          tileset4]
-        );
-
-    // chargement du calque calque_plateforme
-    const calque_plateformes = carteDuNiveau.createLayer(
-          "calque_plateformes",
-          [tileset1,
-          tileset2,
-          tileset3,
-          tileset4]
-          
-        );
     if (clavier.left.isDown) {
       player.setVelocityX(-160);
       player.anims.play("anim_tourne_gauche", true);
-
-      calque_plateformes.setCollisionByProperty({ passerUnSeulSens: false }); 
-      calque_background.setCollisionByProperty({ passerUnSeulSens: false }); 
-      
-
     } else if (clavier.right.isDown) {
       player.setVelocityX(160);
       player.anims.play("anim_tourne_droite", true);
-
-      calque_plateformes.setCollisionByProperty({ passerUnSeulSens: false }); 
-      calque_background.setCollisionByProperty({ passerUnSeulSens: false }); 
-
     } else {
       player.setVelocityX(0);
       player.anims.play("anim_face");
@@ -280,13 +253,7 @@ export default class selection extends Phaser.Scene {
 
     if (clavier.up.isDown && player.body.blocked.down) {
       player.setVelocityY(-330);
-
-      calque_plateformes.setCollisionByProperty({ passerUnSeulSens: false }); 
-      calque_background.setCollisionByProperty({ passerUnSeulSens: false }); 
     }
-
-    calque_plateformes.setCollisionByProperty({ passerUnSeulSens: true }); 
-    calque_background.setCollisionByProperty({ passerUnSeulSens: true }); 
 
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
       if (this.physics.overlap(player, this.porte1))
