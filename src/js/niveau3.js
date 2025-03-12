@@ -120,7 +120,7 @@ export default class niveau3 extends Phaser.Scene {
         this.scene.switch("selection");
       }
     }
-    if (player.x > 4990) {
+    if (this.player.x >79980) {
       this.scene.switch('gameover_burger');
   }
   }

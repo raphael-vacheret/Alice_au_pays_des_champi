@@ -142,7 +142,7 @@ export default class selection extends Phaser.Scene {
      ****************************/
     this.porte1 = this.physics.add.staticSprite(150, 500, "img_porte1");
     this.porte2 = this.physics.add.staticSprite(100, 550, "img_porte2");
-    this.porte3 = this.physics.add.staticSprite(50, 550, "img_porte3");
+    this.porte3 = this.physics.add.staticSprite(550, 500, "img_porte3");
     this.porte4 = this.physics.add.staticSprite(400, 525, "img_porte5");
 
     /****************************
