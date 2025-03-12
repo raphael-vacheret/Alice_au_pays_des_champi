@@ -75,14 +75,14 @@ export default class selection extends Phaser.Scene {
     //  on ajoute 3 platesformes flottantes
     groupe_plateformes.create(600, 450, "img_plateforme");
     groupe_plateformes.create(50, 300, "img_plateforme");
-    groupe_plateformes.create(750, 270, "img_plateforme");
+    groupe_plateformes.create(750, 270,   "img_plateforme");
 
     /****************************
      *  Ajout des portes   *
      ****************************/
     this.porte1 = this.physics.add.staticSprite(600, 414, "img_porte1");
-    this.porte2 = this.physics.add.staticSprite(50, 550, "img_porte2");
-    this.porte3 = this.physics.add.staticSprite(750, 234, "img_porte3");
+    this.porte2 = this.physics.add.staticSprite(50, 264, "img_porte2");
+    this.porte3 = this.physics.add.staticSprite(50, 550, "img_porte3");
     this.porte4 = this.physics.add.staticSprite(400, 550, "img_porte5");
 
     /****************************
