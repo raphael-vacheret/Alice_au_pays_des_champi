@@ -13,7 +13,7 @@ export default class accueil extends Phaser.Scene {
         let image0 = this.add.image(this.scale.width / 2, this.scale.height / 2, "fond_accueil");
         image0.setDisplaySize(this.scale.width, this.scale.height);
         this.add.text(280, 100, 'Alice au pays des champis', {
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+            fontFamily: 'Glitch',
             fontSize: "45pt"
           })
         
