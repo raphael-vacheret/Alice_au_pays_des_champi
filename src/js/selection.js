@@ -8,6 +8,9 @@ var player; // désigne le sprite du joueur
 var clavier; // pour la gestion du clavier
 var groupe_plateformes;
 
+let camera;  // Déclaration de la caméra
+let zoomFactor = 1.5;  // Facteur de zoom initial
+
 // définition de la classe "selection"
 export default class selection extends Phaser.Scene {
   constructor() {
@@ -31,6 +34,7 @@ export default class selection extends Phaser.Scene {
       frameWidth: 46,
       frameHeight: 66
     });
+
     
     this.load.image("img_porte1", "src/assets/alcool_porte.png");
     this.load.image("img_porte2", "src/assets/champi_porte.png");
@@ -62,7 +66,7 @@ export default class selection extends Phaser.Scene {
       fct.doNothing();
       fct.doAlsoNothing();
 
-
+      
 
     // chargement de la carte
     const carteDuNiveau = this.add.tilemap("carte");
@@ -146,11 +150,13 @@ export default class selection extends Phaser.Scene {
      ****************************/
 
     // On créée un nouveeau personnage : player
-    player = this.physics.add.sprite(100, 450, "img_perso");
-
+    //player = this.physics.add.sprite(32,400, "img_perso");
+    player = this.physics.add.sprite(816,528, "img_perso");
+    
     //  propriétées physiqyes de l'objet player :
     player.setBounce(0.2); // on donne un petit coefficient de rebond
     player.setCollideWorldBounds(true); // le player se cognera contre les bords du monde
+    player.setScale(0.5);
 
     /***************************
      *  CREATION DES ANIMATIONS *
@@ -201,10 +207,16 @@ export default class selection extends Phaser.Scene {
     //this.physics.add.collider(player, groupe_plateformes);
 
 
+      
+    
+
     // définition des tuiles de plateformes qui sont solides
     // utilisation de la propriété estSolide
     calque_plateformes.setCollisionByProperty({ estSolide: true }); 
     calque_background.setCollisionByProperty({ estSolide: true }); 
+
+    calque_plateformes.setCollisionByProperty({ passerUnSeulSens: true }); 
+    calque_background.setCollisionByProperty({ passerUnSeulSens: true }); 
 
     // ajout d'une collision entre le joueur et le calque plateformes
     this.physics.add.collider(player, calque_plateformes); 
@@ -217,6 +229,9 @@ export default class selection extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 8000, 640);
     // ancrage de la caméra sur le joueur
     this.cameras.main.startFollow(player); 
+
+    camera = this.cameras.main;
+    camera.setZoom(zoomFactor);
   }
 
   /***********************************************************************/
@@ -236,7 +251,7 @@ export default class selection extends Phaser.Scene {
       player.anims.play("anim_face");
     }
 
-    if (clavier.up.isDown && player.body.touching.down) {
+    if (clavier.up.isDown && player.body.blocked.down) {
       player.setVelocityY(-330);
     }
 

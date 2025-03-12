@@ -74,6 +74,7 @@ export default class niveau3 extends Phaser.Scene {
             if (obstacleType === 0) {
               //diminuer la largeur du player si brocoli
               this.player.setDisplaySize(this.player.displayWidth * 0.9, this.player.displayHeight);
+              this.player.setSize(30,66);
 
             } else {
               if (this.player.displayWidth > 378){
@@ -90,12 +91,13 @@ export default class niveau3 extends Phaser.Scene {
               });
 
               this.time.delayedCall(3000, () => {
-                this.scene.switch("selection");// Remplace par l'URL de destination
+                this.scene.switch("selection");
             }, [], this)
 
               }
               //augmenter la largeur du player si burger
               this.player.setDisplaySize(this.player.displayWidth * 1.3, this.player.displayHeight);
+              this.player.setSize(30,66);
             }
             obstacle.destroy();  // Détruire l'obstacle après la collision
             console.log("Largeur:", this.player.displayWidth);
