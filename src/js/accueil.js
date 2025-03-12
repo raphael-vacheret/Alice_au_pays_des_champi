@@ -4,25 +4,32 @@ export default class accueil extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('fond_accueil', 'src/assets/addiction.png');
+        this.load.image('fond_accueil', 'src/assets/page_accueil.png');
         this.load.image('bouton_play', 'src/assets/bouton.png');
-        this.load.image('bouton_regles', 'src/assets/bouton_regles.png');
+        this.load.image('bouton_regles', 'src/assets/logo_2.png');
+        this.load.image('titre', 'src/assets/Image4.png');
+        
     }
 
     create() {
         let image0 = this.add.image(this.scale.width / 2, this.scale.height / 2, "fond_accueil");
         image0.setDisplaySize(this.scale.width, this.scale.height);
-        this.add.text(280, 100, 'Alice au pays des champis', {
-            fontFamily: 'Glitch',
-            fontSize: "45pt"
+        image0.setTint(0x555555);
+
+        //this.add.image(630, 100, "titre");
+
+        this.add.text(120, 200, 'ALICE AU PAYS DES CHAMPIS', {
+            color : '#FF69B4',
+            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+            fontSize: "55pt"
           })
         
-        let playButton = this.add.image(630, 350, 'bouton_play').setInteractive();
+        let playButton = this.add.image(630, 450, 'bouton_play').setInteractive();
         playButton.on('pointerdown', () => {
-            this.scene.switch('niveau2_1_1');
+            this.scene.switch('selection');
         });
         
-        let rulesButton = this.add.image(1175, 550, 'bouton_regles').setInteractive();
+        let rulesButton = this.add.image(1180, 50, 'bouton_regles').setInteractive();
         rulesButton.on('pointerdown', () => {
             this.scene.switch('regles');
         });
