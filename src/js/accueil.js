@@ -7,7 +7,7 @@ export default class accueil extends Phaser.Scene {
         this.load.image('fond_accueil', 'src/assets/page_accueil.png');
         this.load.image('bouton_play', 'src/assets/bouton.png');
         this.load.image('bouton_regles', 'src/assets/logo_2.png');
-        this.load.image('titre', 'src/assets/Image4.png');
+        this.load.image('titre', 'src/assets/titre2.png');
         
     }
 
@@ -16,15 +16,15 @@ export default class accueil extends Phaser.Scene {
         image0.setDisplaySize(this.scale.width, this.scale.height);
         image0.setTint(0x555555);
 
-        //this.add.image(630, 100, "titre");
+        this.add.image(707, 257, "titre");
 
-        this.add.text(120, 200, 'ALICE AU PAYS DES CHAMPIS', {
-            color : '#FF69B4',
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
-            fontSize: "55pt"
-          })
+        //this.add.text(120, 200, 'ALICE AU PAYS DES CHAMPIS', {
+            //color : '#FF69B4',
+            //fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+            //fontSize: "55pt"
+          //})
         
-        let playButton = this.add.image(630, 450, 'bouton_play').setInteractive();
+        let playButton = this.add.image(630, 430, 'bouton_play').setInteractive();
         playButton.on('pointerdown', () => {
             this.scene.switch('selection');
         });
