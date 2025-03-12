@@ -1,6 +1,7 @@
 var temps;
 let stop = false; // Indique si le sprite a déjà été déclenché
 var zone_texte;
+var zone_texte2;
 
 export default class niveau4 extends Phaser.Scene {
     constructor() {
@@ -41,6 +42,10 @@ export default class niveau4 extends Phaser.Scene {
             fontSize: "bold 32px Arial",
             fill: "#ffd700"
         });
+        zone_texte2 = this.add.text(300, 500, "DEPECHE TOI DE RETIRER TON ARGENT !!!", {
+            fontSize: "bold 32px Arial",
+            fill: "#FFFFFF"
+        });
 
         // Création du sprite du timer avec le premier frame visible
         temps = this.add.sprite(650, 350, "timer", 0); // 0 pour afficher la première frame par défaut
@@ -65,7 +70,7 @@ export default class niveau4 extends Phaser.Scene {
                 // Écoute l'événement de fin d'animation
                 temps.on('animationcomplete', (animation) => {
                     if (animation.key === "anime_temps") {
-                        this.scene.start("selection"); // Change de scène quand l'animation se termine
+                        this.scene.start("niveau4_fin"); // Change de scène quand l'animation se termine
                     }
                 });
             }

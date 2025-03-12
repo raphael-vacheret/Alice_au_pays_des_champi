@@ -15,6 +15,7 @@ import niveau2_3_3 from "/src/js/niveau_2/niveau2_3_3.js";
 import niveau3 from "/src/js/niveau3.js";
 import niveau4 from "/src/js/niveau4.js";
 import gameover_burger from "/src/js/gameover_burger.js";
+import niveau4_fin from "/src/js/niveau4_fin.js";
 
 // configuration générale du jeu
 var config = {
