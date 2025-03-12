@@ -30,10 +30,11 @@ export default class selection extends Phaser.Scene {
       frameWidth: 46,
       frameHeight: 66
     });
-    this.load.image("img_porte1", "src/assets/door1.png");
-    this.load.image("img_porte2", "src/assets/door2.png");
-    this.load.image("img_porte3", "src/assets/door3.png");
+    this.load.image("img_porte1", "src/assets/alcool_porte.png");
+    this.load.image("img_porte2", "src/assets/champi_porte.png");
+    this.load.image("img_porte3", "src/assets/burger_porte.png");
     this.load.image("img_porte4", "src/assets/porte_rose.png");
+    this.load.image("img_porte5", "src/assets/casino.png");
   }
 
   /***********************************************************************/
@@ -82,6 +83,7 @@ export default class selection extends Phaser.Scene {
     this.porte1 = this.physics.add.staticSprite(600, 414, "img_porte1");
     this.porte2 = this.physics.add.staticSprite(50, 550, "img_porte2");
     this.porte3 = this.physics.add.staticSprite(750, 234, "img_porte3");
+    this.porte4 = this.physics.add.staticSprite(400, 550, "img_porte5");
 
     /****************************
      *  CREATION DU PERSONNAGE  *
@@ -172,6 +174,8 @@ export default class selection extends Phaser.Scene {
         this.scene.switch("niveau2_1_1");
       if (this.physics.overlap(player, this.porte3))
         this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte4))
+        this.scene.switch("niveau4");
     }
   }
 }
