@@ -42,7 +42,7 @@ export default class niveau4 extends Phaser.Scene {
             fontSize: "bold 32px Arial",
             fill: "#ffd700"
         });
-        zone_texte2 = this.add.text(300, 500, "DEPECHE TOI DE RETIRER TON ARGENT !!!", {
+        zone_texte2 = this.add.text(300, 500, "DEPECHE TOI DE CLIQUER POUR RETIRER TON ARGENT !!!", {
             fontSize: "bold 32px Arial",
             fill: "#FFFFFF"
         });
