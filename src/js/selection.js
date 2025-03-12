@@ -35,6 +35,15 @@ export default class selection extends Phaser.Scene {
     this.load.image("img_porte3", "src/assets/burger_porte.png");
     this.load.image("img_porte4", "src/assets/porte_rose.png");
     this.load.image("img_porte5", "src/assets/casino.png");
+
+    // chargement tuiles de jeu
+    this.load.image("Phaser_tuilesdejeu1", "src/assets/Tileset.png");
+    this.load.image("Phaser_tuilesdejeu2", "src/assets/Tileset1.png");
+    this.load.image("Phaser_tuilesdejeu3", "src/assets/GUI.png");
+    this.load.image("Phaser_traps", "src/assets/Traps_1-removebg-preview.png");
+
+    // chargement de la carte
+    this.load.tilemapTiledJSON("carte", "src/assets/map.json"); 
   }
 
   /***********************************************************************/
