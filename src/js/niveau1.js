@@ -226,6 +226,11 @@ export default class niveau1 extends Phaser.Scene {
       postFXTriggered = true; // Empêche un nouveau déclenchement
     }
 
+    if (bad_score == 4){
+      console.log(bad_score);
+      this.scene.start("niveau1_fin");
+    }
+
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space)) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
