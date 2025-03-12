@@ -30,10 +30,10 @@ export default class selection extends Phaser.Scene {
       frameWidth: 46,
       frameHeight: 66
     });
-    this.load.image("img_porte1", "src/assets/door1.png");
-    this.load.image("img_porte2", "src/assets/door2.png");
-    this.load.image("img_porte3", "src/assets/door3.png");
-    this.load.image("img_porte4", "src/assets/porteNv_2.png");
+    this.load.image("img_porte1", "src/assets/alcool_porte.png");
+    this.load.image("img_porte2", "src/assets/champi_porte.png");
+    this.load.image("img_porte3", "src/assets/burger_porte.png");
+    this.load.image("img_porte4", "src/assets/porte_rose.png");
   }
 
   /***********************************************************************/

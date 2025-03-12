@@ -6,7 +6,7 @@ import * as fct from "/src/js/fonctions.js";
 var groupe_bouteilles; // contient tous les sprite etoiles
 var score = 0; // pour enregistrer le score
 var zone_texte_score;
-
+var bad_score = 0;
 
 export default class niveau1 extends Phaser.Scene {
   constructor() {
@@ -24,12 +24,12 @@ export default class niveau1 extends Phaser.Scene {
     console.log("Scène niveau1 créée"); // Vérifier que la scène est bien chargée
     //let image = this.add.image(this.scale.width / 2, this.scale.height / 2, "img_bar");
 
-// Calcul du facteur d’échelle pour garder les proportions
-//let scaleX = this.scale.width / 1612;
-//let scaleY = this.scale.height / 980;
-//let scale = Math.max(scaleX, scaleY); // Assure que l’image couvre tout l’écran
+    // Calcul du facteur d’échelle pour garder les proportions
+    //let scaleX = this.scale.width / 1612;
+    //let scaleY = this.scale.height / 980;
+    //let scale = Math.max(scaleX, scaleY); // Assure que l’image couvre tout l’écran
 
-//image.setScale(scale);
+    //image.setScale(scale);
     let image = this.add.image(this.scale.width / 2, this.scale.height / 2, "img_bar");
     image.setDisplaySize(this.scale.width, this.scale.height);
     image.setTint(0x777777); // Applique une teinte plus sombre 0x777777 0x444444
@@ -49,6 +49,8 @@ export default class niveau1 extends Phaser.Scene {
 
     this.clavier = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player, this.groupe_plateformes);
+    this.random = 1; // Valeur par défaut
+    this.direction = 1; // Valeur par défaut
 
     /*************************
      *  CREATION DES BOUTEILLES  *
@@ -64,6 +66,13 @@ export default class niveau1 extends Phaser.Scene {
       callbackScope: this,// Pour que la fonction puisse accéder aux variables de la scène
       loop: true
     });
+    this.time.addEvent({
+      delay: 1500, // Une nouvelle bouteille toutes les seconde
+      callback: this.aleatoire, // Appelle la fonction ajouterBouteille
+      callbackScope: this,// Pour que la fonction puisse accéder aux variables de
+      loop: true,
+    });
+
 
     /*****************************
    *  ZONE D'AFFICHAGE DU SCORE *
@@ -90,6 +99,10 @@ export default class niveau1 extends Phaser.Scene {
 
 
 
+  }
+  aleatoire() {
+    this.random = Phaser.Math.FloatBetween(0.5, 1.5); // Valeur entre 0.5 et 2
+    this.direction = Phaser.Math.RND.sign(); // Retourne -1 ou 1
   }
 
   ajouterBouteille() {
@@ -127,43 +140,87 @@ export default class niveau1 extends Phaser.Scene {
    */
   ramasserBouteille(un_player, une_bouteille) {
     // Vérifie si la bouteille est de type "img_cristaline" ou "img_jack"
+
+    if (une_bouteille.texture.key === "img_jack") {
+      if (score !== 0) {
+        score -= 1;// Diminue le score de 1 point
+        
+      }
+      bad_score += 1;
+    }
     if (une_bouteille.texture.key === "img_cristaline") {
-      if (score === 9){
+      if (score === 9) {
         score += 1; //pour pas que le score soit de 11 si on est déjà à 9
-      }else{
+      } else {
         score += 2; // Augmente le score de 2 points
       }
-    } else if (une_bouteille.texture.key === "img_jack") {
-      if (score !== 0){
-        score -= 1;// Diminue le score de 1 point
-      }
+
     }
     zone_texte_score.setText("Score : " + score); //changement du score
     une_bouteille.destroy(); //destruction de la bouteille
 
-    if (score === 10){
+    if (score === 10) {
       this.scene.switch("selection");
     }
   }
 
 
   update() {
-    if (this.clavier.left.isDown) {
-      this.player.setVelocityX(-300);
-      this.player.anims.play("anim_tourne_gauche", true);
-    } else if (this.clavier.right.isDown) {
-      this.player.setVelocityX(300);
-      this.player.anims.play("anim_tourne_droite", true);
-    } else {
-      this.player.setVelocityX(0);
-      this.player.anims.play("anim_face");
+    if (bad_score == 0) {
+      if (this.clavier.left.isDown) {
+        this.player.setVelocityX(-300);
+        this.player.anims.play("anim_tourne_gauche", true);
+      } else if (this.clavier.right.isDown) {
+        this.player.setVelocityX(300);
+        this.player.anims.play("anim_tourne_droite", true);
+      } else {
+        this.player.setVelocityX(0);
+        this.player.anims.play("anim_face");
+      }
+
+
+      if (this.clavier.up.isDown && this.player.body.touching.down) {
+        this.player.setVelocityY(-330);
+      }
+    }
+    if (bad_score == 1) {
+      if (this.clavier.left.isDown) {
+        this.player.setVelocityX(300);
+        this.player.anims.play("anim_tourne_gauche", true);
+      } else if (this.clavier.right.isDown) {
+        this.player.setVelocityX(-300);
+        this.player.anims.play("anim_tourne_droite", true);
+      } else {
+        this.player.setVelocityX(0);
+        this.player.anims.play("anim_face");
+      }
+
+
+      if (this.clavier.down.isDown && this.player.body.touching.down) {
+        this.player.setVelocityY(-330);
+      }
+    }
+    if (bad_score >= 2) {
+      if (this.clavier.left.isDown) {
+        this.player.setVelocityX(300 *this.random);
+        this.player.anims.play("anim_tourne_gauche", true);
+      } else if (this.clavier.right.isDown) {
+        this.player.setVelocityX(-300 * this.random);
+        this.player.anims.play("anim_tourne_droite", true);
+      } else {
+        this.player.setVelocityX(25 * this.direction);
+        this.player.anims.play("anim_face");
+      }
+
+
+      if (this.clavier.up.isDown && this.player.body.touching.down) {
+        this.player.setVelocityY(-330);
+      }
+    }
+    if (bad_score >= 3) {
+      this.player.postFX.addBlur(4); // Applique un flou de force 8
     }
 
-    
-    if (this.clavier.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
-    }
-    
 
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space)) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
