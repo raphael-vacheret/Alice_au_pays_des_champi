@@ -177,7 +177,7 @@ export default class selection extends Phaser.Scene {
 
     // On créée un nouveeau personnage : player
     //player = this.physics.add.sprite(32,400, "img_perso");
-    player = this.physics.add.sprite(16,400, "img_perso");
+    player = this.physics.add.sprite(816,528, "img_perso");
     
     //  propriétées physiqyes de l'objet player :
     player.setBounce(0.2); // on donne un petit coefficient de rebond
