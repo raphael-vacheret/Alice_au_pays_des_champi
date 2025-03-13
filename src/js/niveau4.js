@@ -90,7 +90,7 @@ export default class niveau4 extends Phaser.Scene {
         
             if (this.monnaie === 0) {
                 this.music.stop();
-                this.scene.start("selection"); // Changement de scène si argent = 0
+                this.scene.switch("selection"); // Changement de scène si argent = 0
             } else {
                 this.ajouterJeton(); // Ajoute un jeton qui tombe
             }

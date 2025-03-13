@@ -18,7 +18,7 @@ export default class selection extends Phaser.Scene {
 
   /***********************************************************************/
   /** FONCTION PRELOAD 
-/***********************************************************************/
+  /***********************************************************************/
 
   /** La fonction preload est appelée une et une seule fois,
    * lors du chargement de la scene dans le jeu.
@@ -27,13 +27,13 @@ export default class selection extends Phaser.Scene {
   preload() {
     // tous les assets du jeu sont placés dans le sous-répertoire src/assets/
     
-
+    // chargement asset du personnage
     this.load.spritesheet("img_perso", "src/assets/selection/perso1.png", {
       frameWidth: 46,
       frameHeight: 66
     });
 
-    
+    // chargement asset des images pour mini-jeux 
     this.load.image("img_porte1", "src/assets/selection/alcool_porte.png");
     this.load.image("img_porte2", "src/assets/selection/champi_porte.png");
     this.load.image("img_porte3", "src/assets/selection/burger_porte.png");
@@ -46,6 +46,7 @@ export default class selection extends Phaser.Scene {
     this.load.image("Phaser_tuilesdejeu3", "src/assets/selection/GUI.png");
     this.load.image("Phaser_traps", "src/assets/selection/Traps_1-removebg-preview.png");
 
+    // asset de la porte final de la map
     this.load.image("img_porteFin", "src/assets/porteNv_2.png");
 
     // chargement de la carte
@@ -54,7 +55,7 @@ export default class selection extends Phaser.Scene {
 
   /***********************************************************************/
   /** FONCTION CREATE 
-/***********************************************************************/
+  /***********************************************************************/
 
   /* La fonction create est appelée lors du lancement de la scene
    * si on relance la scene, elle sera appelée a nouveau
@@ -66,17 +67,18 @@ export default class selection extends Phaser.Scene {
       fct.doNothing();
       fct.doAlsoNothing();
 
-      
+    /***********************************************************************/
+    /**CHARGEMENT CARTE, TUILES ET CALQUES
+    /***********************************************************************/
 
     // chargement de la carte
     const carteDuNiveau = this.add.tilemap("carte");
 
-    // chargement du jeu de tuiles
+    // chargement des 4 jeux de tuiles
     const tileset1 = carteDuNiveau.addTilesetImage(
           "Tileset",
           "Phaser_tuilesdejeu1"
         ); 
-    // chargement du jeu de tuiles
     const tileset2 = carteDuNiveau.addTilesetImage(
           "Tileset2",
           "Phaser_tuilesdejeu2"
@@ -85,12 +87,10 @@ export default class selection extends Phaser.Scene {
           "GUI",
           "Phaser_tuilesdejeu3"
         ); 
-    // chargement du jeu de tuiles
     const tileset4 = carteDuNiveau.addTilesetImage(
           "Traps_1-removebg-preview",
           "Phaser_traps"
         ); 
-
 
 
     // chargement du calque calque_background
@@ -123,11 +123,9 @@ export default class selection extends Phaser.Scene {
 
 
     /*************************************
-     *  CREATION DU MONDE + PLATEFORMES  *
+     *  PLACEMENT DES MINI-JEUX SUR LA MAP  *
      *************************************/
 
-    
-    
     this.porte1_1 = this.physics.add.staticSprite(224,128,"img_porte1") 
     this.porte2_1 = this.physics.add.staticSprite(592,320 ,"img_porte2")  
     this.porte3_1 = this.physics.add.staticSprite(832,144 ,"img_porte3")  
@@ -141,37 +139,26 @@ export default class selection extends Phaser.Scene {
     this.porte1_3 = this.physics.add.staticSprite(3120,320,"img_porte1")   
     this.porte2_3 = this.physics.add.staticSprite(4576,544,"img_porte2")  
     this.porte3_3 = this.physics.add.staticSprite(4240,64,"img_porte3")  
-    this.porte4_3 = this.physics.add.staticSprite(4656,336,"img_porte5") 
-
+    this.porte4_3 = this.physics.add.staticSprite(4912,64,"img_porte5") 
+    
     this.porte1_4 = this.physics.add.staticSprite(5584,160 ,"img_porte1")   
     this.porte2_4 = this.physics.add.staticSprite(4576,480,"img_porte2")  
-    this.porte3_4 = this.physics.add.staticSprite(4912,64,"img_porte3")  
+    this.porte3_4 = this.physics.add.staticSprite(4656,336,"img_porte3")  
     this.porte4_4 = this.physics.add.staticSprite(5744,464,"img_porte5") 
 
     this.porte1_5 = this.physics.add.staticSprite(6608,560,"img_porte1")   
     this.porte2_5 = this.physics.add.staticSprite(6032,160,"img_porte2")  
-    this.porte3_5 = this.physics.add.staticSprite(4240,264,"img_porte3")  
+    this.porte3_5 = this.physics.add.staticSprite(4240,464,"img_porte3")  
     this.porte4_5 = this.physics.add.staticSprite(1712,352,"img_porte5") 
+     
     
     this.porteFin = this.physics.add.staticSprite(6464,368,"img_porteFin")
 
-    // mini jeux alcool
-    // mini jeux champi
-    // mini jeux burger
-    // mini jeux argent 
+    // porte1_n : mini jeu alcool
+    // porte2_n : mini jeu champi
+    // porte3_n : mini jeu burger
+    // porte4_n : mini jeu argent 
 
-    // la création d'un groupes permet de gérer simultanément les éléments d'une meme famille
-    //  Le groupe groupe_plateformes contiendra le sol et deux platesformes sur lesquelles sauter
-    // notez le mot clé "staticGroup" : le static indique que ces élements sont fixes : pas de gravite,
-    // ni de possibilité de les pousser.
-  
-
-    
-
-    /****************************
-     *  Ajout des portes   *
-     ****************************/
-    
 
 
     /****************************
@@ -179,21 +166,20 @@ export default class selection extends Phaser.Scene {
      ****************************/
 
     // On créée un nouveeau personnage : player
-    //player = this.physics.add.sprite(32,400, "img_perso");
     player = this.physics.add.sprite(16,400, "img_perso");
     
-    //  propriétées physiqyes de l'objet player :
+    //  propriétées physiques de l'objet player :
     player.setBounce(0.2); // on donne un petit coefficient de rebond
     player.setCollideWorldBounds(true); // le player se cognera contre les bords du monde
-    player.setScale(0.5);
+    player.setScale(0.5); // le player est réduit pour correspondre à la taille de la map 
+
 
     /***************************
      *  CREATION DES ANIMATIONS *
      ****************************/
-    // dans cette partie, on crée les animations, à partir des spritesheet
-    // chaque animation est une succession de frame à vitesse de défilement défini
-    // une animation doit avoir un nom. Quand on voudra la jouer sur un sprite, on utilisera la méthode play()
-    // creation de l'animation "anim_tourne_gauche" qui sera jouée sur le player lorsque ce dernier tourne à gauche
+    // dans cette partie, on crée les animations, à partir des spritesheet chaque animation est une succession 
+    // de frame à vitesse de défilement défini une animation doit avoir un nom. Quand on voudra la jouer sur un sprite, 
+    // on utilisera la méthode play() creation de l'animation "anim_tourne_gauche" qui sera jouée sur le player lorsque ce dernier tourne à gauche
     this.anims.create({
       key: "anim_tourne_gauche", // key est le nom de l'animation : doit etre unique poru la scene.
       frames: this.anims.generateFrameNumbers("img_perso", {
@@ -229,14 +215,8 @@ export default class selection extends Phaser.Scene {
     clavier = this.input.keyboard.createCursorKeys();
 
     /*****************************************************
-     *  GESTION DES INTERATIONS ENTRE  GROUPES ET ELEMENTS *
+     *  GESTION DES INTERACTIONS *
      ******************************************************/
-
-    //  Collide the player with the groupe_plateformes
-    //this.physics.add.collider(player, groupe_plateformes);
-
-
-    
 
     // définition des tuiles de plateformes qui sont solides
     // utilisation de la propriété estSolide et de la propriété passerUnSeulSens
@@ -245,14 +225,15 @@ export default class selection extends Phaser.Scene {
 
     calque_plateformes.setCollisionByProperty({ passerUnSeulSens: true }); 
     calque_background.setCollisionByProperty({ passerUnSeulSens: true }); 
+    // passerUnSeulSens est une propriété établie dans Tiled qui n'a pas pu être exploité
 
     
-    // ajout d'une collision entre le joueur et le calque plateformes
+    // ajout d'une collision entre le joueur et les calques 
     this.physics.add.collider(player, calque_plateformes); 
     this.physics.add.collider(player, calque_background);
     this.physics.add.collider(player, calque_traps);
 
-    
+
     // redimentionnement du monde avec les dimensions calculées via tiled
     this.physics.world.setBounds(0, 0, 8000, 640);
     //  ajout du champs de la caméra de taille identique à celle du monde
@@ -260,16 +241,18 @@ export default class selection extends Phaser.Scene {
     // ancrage de la caméra sur le joueur
     this.cameras.main.startFollow(player); 
 
+    // le zoom est activé
     camera = this.cameras.main;
     camera.setZoom(zoomFactor);
   }
 
   /***********************************************************************/
   /** FONCTION UPDATE 
-/***********************************************************************/
+  /***********************************************************************/
 
   update() {
     
+    // Déplacement du personnage 
     if (clavier.left.isDown) {
       player.setVelocityX(-160);
       player.anims.play("anim_tourne_gauche", true);
@@ -285,8 +268,9 @@ export default class selection extends Phaser.Scene {
       player.setVelocityY(-330);
     }
 
-    if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) { // pour faire un sorte qu'il soit tp 
-      // quand il touche la "porte" enlever la ligne 258
+    // Lorsque le joueur arrive sur une des "portes" correspondant à un mini jeux 
+    // le joueur est transporté dans le niveau lorsqu'il clique sur la barre espace 
+    if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) { 
       if (this.physics.overlap(player, this.porte1_1)) this.scene.switch("niveau1");
         //this.porte1.destroy(); // on destroy la porte pour ne pas y retourner
       if (this.physics.overlap(player, this.porte1_2)) this.scene.switch("niveau1");
@@ -318,17 +302,8 @@ export default class selection extends Phaser.Scene {
       if (this.physics.overlap(player, this.porteFin)) this.scene.start("accueil");
     
     }
-    if (this.physics.overlap(player, this.porte3_1)) this.scene.switch("niveau3");
-      if (this.physics.overlap(player, this.porte3_2)) this.scene.switch("niveau3");
-      if (this.physics.overlap(player, this.porte3_3)) this.scene.switch("niveau3");
-      if (this.physics.overlap(player, this.porte3_4)) this.scene.switch("niveau3");
-      if (this.physics.overlap(player, this.porte3_5)) this.scene.switch("niveau3");
     
   }
 
 
 }
-
-/***********************************************************************/
-/** CONFIGURATION GLOBALE DU JEU ET LANCEMENT 
-/***********************************************************************/
