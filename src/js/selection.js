@@ -6,7 +6,6 @@ import * as fct from "/src/js/fonctions.js";
 
 var player; // désigne le sprite du joueur
 var clavier; // pour la gestion du clavier
-var groupe_plateformes;
 
 let camera;  // Déclaration de la caméra
 let zoomFactor = 1.5;  // Facteur de zoom initial
@@ -126,27 +125,32 @@ export default class selection extends Phaser.Scene {
      *  CREATION DU MONDE + PLATEFORMES  *
      *************************************/
 
-    //groupe_miniJeux = this.physics.add.staticGroup()
-    this.porte3 = this.physics.add.staticSprite(224,128,"img_porte3")   
-    this.porte3 = this.physics.add.staticSprite(592,320 ,"img_porte3")  
-    this.porte3 = this.physics.add.staticSprite(832,144 ,"img_porte3")  
-    this.porte3 = this.physics.add.staticSprite(368,432 ,"img_porte3")  
-    this.porte3 = this.physics.add.staticSprite(1264,352 ,"img_porte3")   
-    //groupe_miniJeux.create(2192,192,"img_porte2")  
-    //groupe_miniJeux.create(1600,496,"img_porte3")  
-   //groupe_miniJeux.create(2336,448,"img_porte5") 
-   // groupe_miniJeux.create(3120,320,"img_porte1")   
-    //groupe_miniJeux.create(4576,544,"img_porte2")  
-    //groupe_miniJeux.create(4240,64,"img_porte3")  
-    //groupe_miniJeux.create(4656,336,"img_porte5") 
-    //groupe_miniJeux.create(5584,160 ,"img_porte1")   
-    //groupe_miniJeux.create(4576,480,"img_porte2")  
-    //groupe_miniJeux.create(4912,64,"img_porte3")  
-    //groupe_miniJeux.create(5744,464,"img_porte5") 
-    //groupe_miniJeux.create(6608,560,"img_porte1")   
-    //groupe_miniJeux.create(6032,160,"img_porte2")  
-    //groupe_miniJeux.create(4240,264,"img_porte3")  
-    //groupe_miniJeux.create(1712,352,"img_porte5") 
+    
+    
+    this.porte1_1 = this.physics.add.staticSprite(224,128,"img_porte1") 
+    this.porte2_1 = this.physics.add.staticSprite(592,320 ,"img_porte2")  
+    this.porte3_1 = this.physics.add.staticSprite(832,144 ,"img_porte3")  
+    this.porte4_1 = this.physics.add.staticSprite(368,432 ,"img_porte5")  
+
+    this.porte1_2 = this.physics.add.staticSprite(1264,352 ,"img_porte1")   
+    this.porte2_2 = this.physics.add.staticSprite(2192,192,"img_porte2")  
+    this.porte3_2 = this.physics.add.staticSprite(1600,496,"img_porte3")  
+    this.porte4_2 = this.physics.add.staticSprite(2336,448,"img_porte5") 
+
+    this.porte1_3 = this.physics.add.staticSprite(3120,320,"img_porte1")   
+    this.porte2_3 = this.physics.add.staticSprite(4576,544,"img_porte2")  
+    this.porte3_3 = this.physics.add.staticSprite(4240,64,"img_porte3")  
+    this.porte4_3 = this.physics.add.staticSprite(4656,336,"img_porte5") 
+
+    this.porte1_4 = this.physics.add.staticSprite(5584,160 ,"img_porte1")   
+    this.porte2_4 = this.physics.add.staticSprite(4576,480,"img_porte2")  
+    this.porte3_4 = this.physics.add.staticSprite(4912,64,"img_porte3")  
+    this.porte4_4 = this.physics.add.staticSprite(5744,464,"img_porte5") 
+
+    this.porte1_5 = this.physics.add.staticSprite(6608,560,"img_porte1")   
+    this.porte2_5 = this.physics.add.staticSprite(6032,160,"img_porte2")  
+    this.porte3_5 = this.physics.add.staticSprite(4240,264,"img_porte3")  
+    this.porte4_5 = this.physics.add.staticSprite(1712,352,"img_porte5") 
 
     // mini jeux alcool
     // mini jeux champi
@@ -158,15 +162,14 @@ export default class selection extends Phaser.Scene {
     // notez le mot clé "staticGroup" : le static indique que ces élements sont fixes : pas de gravite,
     // ni de possibilité de les pousser.
   
+
     
 
     /****************************
      *  Ajout des portes   *
      ****************************/
-    this.porte1 = this.physics.add.staticSprite(700, 500, "img_porte1");
-    this.porte2 = this.physics.add.staticSprite(600, 550, "img_porte2");
-    this.porte3 = this.physics.add.staticSprite(550, 500, "img_porte3");
-    this.porte4 = this.physics.add.staticSprite(400, 525, "img_porte5");
+    
+
 
     /****************************
      *  CREATION DU PERSONNAGE  *
@@ -233,7 +236,7 @@ export default class selection extends Phaser.Scene {
     
 
     // définition des tuiles de plateformes qui sont solides
-    // utilisation de la propriété estSolide
+    // utilisation de la propriété estSolide et de la propriété passerUnSeulSens
     calque_plateformes.setCollisionByProperty({ estSolide: true }); 
     calque_background.setCollisionByProperty({ estSolide: true }); 
 
@@ -241,12 +244,12 @@ export default class selection extends Phaser.Scene {
     calque_background.setCollisionByProperty({ passerUnSeulSens: true }); 
 
     
-
     // ajout d'une collision entre le joueur et le calque plateformes
     this.physics.add.collider(player, calque_plateformes); 
     this.physics.add.collider(player, calque_background);
-    
+    this.physics.add.collider(player, calque_traps);
 
+    
     // redimentionnement du monde avec les dimensions calculées via tiled
     this.physics.world.setBounds(0, 0, 8000, 640);
     //  ajout du champs de la caméra de taille identique à celle du monde
@@ -281,19 +284,40 @@ export default class selection extends Phaser.Scene {
 
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) { // pour faire un sorte qu'il soit tp 
       // quand il touche la "porte" enlever la ligne 258
-      if (this.physics.overlap(player, this.porte1))
-        this.scene.switch("niveau1");
+      if (this.physics.overlap(player, this.porte1_1)) this.scene.switch("niveau1");
         //this.porte1.destroy(); // on destroy la porte pour ne pas y retourner
-      if (this.physics.overlap(player, this.porte2))
-        this.scene.switch("niveau2_1_1");
-      if (this.physics.overlap(player, this.porte3))
-        this.scene.start("niveau3");
-      if (this.physics.overlap(player, this.porte4))
-        this.scene.switch("niveau4");
+      if (this.physics.overlap(player, this.porte1_2)) this.scene.switch("niveau1");
+      if (this.physics.overlap(player, this.porte1_3)) this.scene.switch("niveau1");
+      if (this.physics.overlap(player, this.porte1_4)) this.scene.switch("niveau1");
+      if (this.physics.overlap(player, this.porte1_5)) this.scene.switch("niveau1");
+
+
+      if (this.physics.overlap(player, this.porte2_1)) this.scene.switch("niveau2_1_1");
+      if (this.physics.overlap(player, this.porte2_2)) this.scene.switch("niveau2_1_1");
+      if (this.physics.overlap(player, this.porte2_3)) this.scene.switch("niveau2_1_1");
+      if (this.physics.overlap(player, this.porte2_4)) this.scene.switch("niveau2_1_1");
+      if (this.physics.overlap(player, this.porte2_5)) this.scene.switch("niveau2_1_1");
+
+
+      if (this.physics.overlap(player, this.porte3_1)) this.scene.start("niveau3");
+      if (this.physics.overlap(player, this.porte3_2)) this.scene.start("niveau3");
+      if (this.physics.overlap(player, this.porte3_3)) this.scene.start("niveau3");
+      if (this.physics.overlap(player, this.porte3_4)) this.scene.start("niveau3");
+      if (this.physics.overlap(player, this.porte3_5)) this.scene.start("niveau3");
+     
+
+      if (this.physics.overlap(player, this.porte4_1)) this.scene.switch("niveau4");
+      if (this.physics.overlap(player, this.porte4_2)) this.scene.switch("niveau4");
+      if (this.physics.overlap(player, this.porte4_3)) this.scene.switch("niveau4");
+      if (this.physics.overlap(player, this.porte4_4)) this.scene.switch("niveau4");
+      if (this.physics.overlap(player, this.porte4_5)) this.scene.switch("niveau4");
+    
     }
+    
+    
   }
 
-  
+
 }
 
 /***********************************************************************/

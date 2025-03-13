@@ -240,6 +240,7 @@ export default class niveau1 extends Phaser.Scene {
       console.log(bad_score);
       bad_score = 0;
       score = 0;
+      
       this.scene.start("niveau1_fin");
     }
 
