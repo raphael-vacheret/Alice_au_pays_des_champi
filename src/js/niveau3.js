@@ -80,6 +80,7 @@ export default class niveau3 extends Phaser.Scene {
         this.physics.add.collider(this.player, obstacle, () => {
             if (obstacleType === 0) {
               if (this.player.displayWidth<50) {
+                this.sound.stopAll();
                 this.scene.switch('gameover_burger');
             }
               //diminuer la largeur du player si brocoli
