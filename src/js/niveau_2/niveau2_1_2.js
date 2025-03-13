@@ -6,15 +6,14 @@ export default class niveau2_1_2 extends Phaser.Scene {
       });
     }
     preload() {
-      this.load.image("tuile_1","src/assets/arcenciel.png");
-    this.load.image("tuile_2", "src/assets/canabis-removebg-preview.png");
-    this.load.image("tuile_3", "src/assets/elephant.png");
-    this.load.image("tuile_4", "src/assets/Overlay_illumination.png");
-    this.load.image("tuile_5", "src/assets/unicorn-sprite_1.png");
-    this.load.image("tuile_6", "src/assets/unicorn-sprite_2.png");
-    this.load.image("tuile_7", "src/assets/unicorn-sprite_3.png");
-    this.load.tilemapTiledJSON("map", "src/assets/map_champi.json");
-    this.load.audio('son_champi', 'src/assets/son_champi.mp3');
+      this.load.image("tuile_1","src/assets/niveau2/arcenciel.png");
+    this.load.image("tuile_2", "src/assets/niveau2/canabis-removebg-preview.png");
+    this.load.image("tuile_3", "src/assets/niveau2/elephant.png");
+    this.load.image("tuile_4", "src/assets/niveau2/Overlay_illumination.png");
+    this.load.image("tuile_5", "src/assets/niveau2/unicorn-sprite_1.png");
+    this.load.image("tuile_6", "src/assets/niveau2/unicorn-sprite_2.png");
+    this.load.image("tuile_7", "src/assets/niveau2/unicorn-sprite_3.png");
+    this.load.tilemapTiledJSON("map", "src/assets/niveau2/map_champi.json");
     }
   
     create() {
@@ -83,8 +82,8 @@ export default class niveau2_1_2 extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
         if (this.physics.overlap(this.player, this.porte_retour)) {
           console.log("vrai");
-          this.sound.stopAll();
-          this.scene.switch("niveau2_fin");
+          this.music.stop();
+          this.scene.switch("niveau2_1_3");
         }
         if (this.physics.overlap(this.player, this.porte_3)) {
           console.log("vrai");
@@ -92,7 +91,8 @@ export default class niveau2_1_2 extends Phaser.Scene {
         }
         if (this.physics.overlap(this.player, this.porte_perdu)) {
           console.log("faux");
-          this.scene.switch("niveau2_1_3");
+          this.scene.switch("niveau2_fin");
+          
         }
       }
     }

@@ -13,7 +13,7 @@ export default class niveau3 extends Phaser.Scene {
     this.load.image("tuile_3_3", "src/assets/niveau3/mcdo.png");
     this.load.image("tuile_4_4", "src/assets/niveau3/piste.jpg");
     this.load.tilemapTiledJSON("map3", "src/assets/niveau3/map_burger.json");
-    this.load.audio('son_burger', 'src/assets/son_burger.mp3');
+    this.load.audio('son_burger', 'src/assets/niveau3/son_burger.mp3');
   }
 
   create() {

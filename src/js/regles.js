@@ -5,7 +5,7 @@ export default class regles extends Phaser.Scene {
 
     preload() {
 
-        this.load.image('bouton_retour', 'src/assets/fleche_retour.png');
+        this.load.image('bouton_retour', 'src/assets/accueil/fleche_retour.png');
     }
 
     create() {
@@ -21,14 +21,14 @@ export default class regles extends Phaser.Scene {
 
         // Texte des règles du jeu (centré verticalement)
         const regles = 
-            "🌍 5 mondes : la map principale + 4 mini-jeux.\n\n --> Va de l'autre côté de la map pour vaincre tes addictions.\n\n" +
+            "🌍 5 mondes : la map principale + 4 mini-jeux.\n\n --> Va de l'autre côté de la map, surmonte tes addictions en appuyant sur Espace.\n\n" +
             "🍾 Drunk People : Récupère 10 bouteilles d'eau, évite l'alcool !\n\n" +
-            "🍄 Magic Champi : Répond bien aux questions pour te désintoxiquer.\n\n" +
+            "🍄 Magic Champi : Réponds bien aux questions pour te désintoxiquer.\n\n" +
             "🍔 Eat Well : Trop de burgers = trop gros ! Les brocolis sont ta survie.\n\n" +
-            "💰 Money Clicker : Clique sur le jeton à temps ou perd tout ton argent !";
+            "💰 Money Clicker : Clique sur le jeton à temps ou perds tout ton argent !";
 
         // Affichage du texte des règles bien centré et justifié
-        this.add.text(150, 180, regles, {
+        this.add.text(150, 160, regles, {
             fontFamily: 'Arial',
             fontSize: "22pt",
             color: "#FFFFFF",

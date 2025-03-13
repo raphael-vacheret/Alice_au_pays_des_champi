@@ -8,7 +8,7 @@ var player; // désigne le sprite du joueur
 var clavier; // pour la gestion du clavier
 
 let camera;  // Déclaration de la caméra
-let zoomFactor = 1.5;  // Facteur de zoom initial
+let zoomFactor = 1.7;  // Facteur de zoom initial
 
 // définition de la classe "selection"
 export default class selection extends Phaser.Scene {
@@ -29,26 +29,28 @@ export default class selection extends Phaser.Scene {
     this.load.image("img_ciel", "src/assets/sky.png");
     this.load.image("img_plateforme", "src/assets/platform.png");
 
-    this.load.spritesheet("img_perso", "src/assets/perso1.png", {
+    this.load.spritesheet("img_perso", "src/assets/selection/perso1.png", {
       frameWidth: 46,
       frameHeight: 66
     });
 
     
-    this.load.image("img_porte1", "src/assets/alcool_porte.png");
-    this.load.image("img_porte2", "src/assets/champi_porte.png");
-    this.load.image("img_porte3", "src/assets/burger_porte.png");
-    this.load.image("img_porte4", "src/assets/porte_rose.png");
-    this.load.image("img_porte5", "src/assets/casino.png");
+    this.load.image("img_porte1", "src/assets/selection/alcool_porte.png");
+    this.load.image("img_porte2", "src/assets/selection/champi_porte.png");
+    this.load.image("img_porte3", "src/assets/selection/burger_porte.png");
+    this.load.image("img_porte4", "src/assets/selection/porte_rose.png");
+    this.load.image("img_porte5", "src/assets/selection/casino.png");
 
     // chargement tuiles de jeu
-    this.load.image("Phaser_tuilesdejeu1", "src/assets/Tileset.png");
-    this.load.image("Phaser_tuilesdejeu2", "src/assets/Tileset2.png");
-    this.load.image("Phaser_tuilesdejeu3", "src/assets/GUI.png");
-    this.load.image("Phaser_traps", "src/assets/Traps_1-removebg-preview.png");
+    this.load.image("Phaser_tuilesdejeu1", "src/assets/selection/Tileset.png");
+    this.load.image("Phaser_tuilesdejeu2", "src/assets/selection/Tileset2.png");
+    this.load.image("Phaser_tuilesdejeu3", "src/assets/selection/GUI.png");
+    this.load.image("Phaser_traps", "src/assets/selection/Traps_1-removebg-preview.png");
+
+    this.load.image("img_porteFin", "src/assets/porteNv_2.png");
 
     // chargement de la carte
-    this.load.tilemapTiledJSON("carte", "src/assets/mapJeu.json"); 
+    this.load.tilemapTiledJSON("carte", "src/assets/selection/mapJeu.json"); 
   }
 
   /***********************************************************************/
@@ -151,6 +153,8 @@ export default class selection extends Phaser.Scene {
     this.porte2_5 = this.physics.add.staticSprite(6032,160,"img_porte2")  
     this.porte3_5 = this.physics.add.staticSprite(4240,264,"img_porte3")  
     this.porte4_5 = this.physics.add.staticSprite(1712,352,"img_porte5") 
+    
+    this.porteFin = this.physics.add.staticSprite(6464,368,"img_porteFin")
 
     // mini jeux alcool
     // mini jeux champi
@@ -177,7 +181,7 @@ export default class selection extends Phaser.Scene {
 
     // On créée un nouveeau personnage : player
     //player = this.physics.add.sprite(32,400, "img_perso");
-    player = this.physics.add.sprite(816,528, "img_perso");
+    player = this.physics.add.sprite(16,400, "img_perso");
     
     //  propriétées physiqyes de l'objet player :
     player.setBounce(0.2); // on donne un petit coefficient de rebond
@@ -299,11 +303,11 @@ export default class selection extends Phaser.Scene {
       if (this.physics.overlap(player, this.porte2_5)) this.scene.switch("niveau2_1_1");
 
 
-      if (this.physics.overlap(player, this.porte3_1)) this.scene.start("niveau3");
-      if (this.physics.overlap(player, this.porte3_2)) this.scene.start("niveau3");
-      if (this.physics.overlap(player, this.porte3_3)) this.scene.start("niveau3");
-      if (this.physics.overlap(player, this.porte3_4)) this.scene.start("niveau3");
-      if (this.physics.overlap(player, this.porte3_5)) this.scene.start("niveau3");
+      if (this.physics.overlap(player, this.porte3_1)) this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte3_2)) this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte3_3)) this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte3_4)) this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte3_5)) this.scene.switch("niveau3");
      
 
       if (this.physics.overlap(player, this.porte4_1)) this.scene.switch("niveau4");
@@ -311,6 +315,8 @@ export default class selection extends Phaser.Scene {
       if (this.physics.overlap(player, this.porte4_3)) this.scene.switch("niveau4");
       if (this.physics.overlap(player, this.porte4_4)) this.scene.switch("niveau4");
       if (this.physics.overlap(player, this.porte4_5)) this.scene.switch("niveau4");
+
+      if (this.physics.overlap(player, this.porteFin)) this.scene.start("accueil");
     
     }
     
