@@ -271,33 +271,33 @@ export default class selection extends Phaser.Scene {
     // Lorsque le joueur arrive sur une des "portes" correspondant à un mini jeux 
     // le joueur est transporté dans le niveau lorsqu'il clique sur la barre espace 
     if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) { 
-      if (this.physics.overlap(player, this.porte1_1)) this.scene.switch("niveau1");
+      if (this.physics.overlap(player, this.porte1_1)) this.scene.start("niveau1");
         //this.porte1.destroy(); // on destroy la porte pour ne pas y retourner
-      if (this.physics.overlap(player, this.porte1_2)) this.scene.switch("niveau1");
-      if (this.physics.overlap(player, this.porte1_3)) this.scene.switch("niveau1");
-      if (this.physics.overlap(player, this.porte1_4)) this.scene.switch("niveau1");
-      if (this.physics.overlap(player, this.porte1_5)) this.scene.switch("niveau1");
+      if (this.physics.overlap(player, this.porte1_2)) this.scene.start("niveau1");
+      if (this.physics.overlap(player, this.porte1_3)) this.scene.start("niveau1");
+      if (this.physics.overlap(player, this.porte1_4)) this.scene.start("niveau1");
+      if (this.physics.overlap(player, this.porte1_5)) this.scene.start("niveau1");
 
 
-      if (this.physics.overlap(player, this.porte2_1)) this.scene.switch("niveau2_1_1");
-      if (this.physics.overlap(player, this.porte2_2)) this.scene.switch("niveau2_1_1");
-      if (this.physics.overlap(player, this.porte2_3)) this.scene.switch("niveau2_1_1");
-      if (this.physics.overlap(player, this.porte2_4)) this.scene.switch("niveau2_1_1");
-      if (this.physics.overlap(player, this.porte2_5)) this.scene.switch("niveau2_1_1");
+      if (this.physics.overlap(player, this.porte2_1)) this.scene.start("niveau2_1_1");
+      if (this.physics.overlap(player, this.porte2_2)) this.scene.start("niveau2_1_1");
+      if (this.physics.overlap(player, this.porte2_3)) this.scene.start("niveau2_1_1");
+      if (this.physics.overlap(player, this.porte2_4)) this.scene.start("niveau2_1_1");
+      if (this.physics.overlap(player, this.porte2_5)) this.scene.start("niveau2_1_1");
 
 
-      if (this.physics.overlap(player, this.porte3_1)) this.scene.switch("niveau3");
-      if (this.physics.overlap(player, this.porte3_2)) this.scene.switch("niveau3");
-      if (this.physics.overlap(player, this.porte3_3)) this.scene.switch("niveau3");
-      if (this.physics.overlap(player, this.porte3_4)) this.scene.switch("niveau3");
-      if (this.physics.overlap(player, this.porte3_5)) this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte3_1)) this.scene.start("niveau3");
+      if (this.physics.overlap(player, this.porte3_2)) this.scene.start("niveau3");
+      if (this.physics.overlap(player, this.porte3_3)) this.scene.start("niveau3");
+      if (this.physics.overlap(player, this.porte3_4)) this.scene.start("niveau3");
+      if (this.physics.overlap(player, this.porte3_5)) this.scene.start("niveau3");
      
 
-      if (this.physics.overlap(player, this.porte4_1)) this.scene.switch("niveau4");
-      if (this.physics.overlap(player, this.porte4_2)) this.scene.switch("niveau4");
-      if (this.physics.overlap(player, this.porte4_3)) this.scene.switch("niveau4");
-      if (this.physics.overlap(player, this.porte4_4)) this.scene.switch("niveau4");
-      if (this.physics.overlap(player, this.porte4_5)) this.scene.switch("niveau4");
+      if (this.physics.overlap(player, this.porte4_1)) this.scene.start("niveau4");
+      if (this.physics.overlap(player, this.porte4_2)) this.scene.start("niveau4");
+      if (this.physics.overlap(player, this.porte4_3)) this.scene.start("niveau4");
+      if (this.physics.overlap(player, this.porte4_4)) this.scene.start("niveau4");
+      if (this.physics.overlap(player, this.porte4_5)) this.scene.start("niveau4");
 
       if (this.physics.overlap(player, this.porteFin)) this.scene.start("accueil");
     
