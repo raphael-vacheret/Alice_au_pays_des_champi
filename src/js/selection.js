@@ -26,8 +26,7 @@ export default class selection extends Phaser.Scene {
    */
   preload() {
     // tous les assets du jeu sont placés dans le sous-répertoire src/assets/
-    this.load.image("img_ciel", "src/assets/sky.png");
-    this.load.image("img_plateforme", "src/assets/platform.png");
+    
 
     this.load.spritesheet("img_perso", "src/assets/selection/perso1.png", {
       frameWidth: 46,
@@ -319,7 +318,11 @@ export default class selection extends Phaser.Scene {
       if (this.physics.overlap(player, this.porteFin)) this.scene.start("accueil");
     
     }
-    
+    if (this.physics.overlap(player, this.porte3_1)) this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte3_2)) this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte3_3)) this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte3_4)) this.scene.switch("niveau3");
+      if (this.physics.overlap(player, this.porte3_5)) this.scene.switch("niveau3");
     
   }
 
