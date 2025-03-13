@@ -126,9 +126,32 @@ export default class selection extends Phaser.Scene {
      *  CREATION DU MONDE + PLATEFORMES  *
      *************************************/
 
-    // On ajoute une simple image de fond, le ciel, au centre de la zone affichée (400, 300)
-    // Par défaut le point d'ancrage d'une image est le centre de cette derniere
-    //this.add.image(400, 300, "img_ciel");
+    //groupe_miniJeux = this.physics.add.staticGroup()
+    this.porte3 = this.physics.add.staticSprite(224,128,"img_porte3")   
+    this.porte3 = this.physics.add.staticSprite(592,320 ,"img_porte3")  
+    this.porte3 = this.physics.add.staticSprite(832,144 ,"img_porte3")  
+    this.porte3 = this.physics.add.staticSprite(368,432 ,"img_porte3")  
+    this.porte3 = this.physics.add.staticSprite(1264,352 ,"img_porte3")   
+    //groupe_miniJeux.create(2192,192,"img_porte2")  
+    //groupe_miniJeux.create(1600,496,"img_porte3")  
+   //groupe_miniJeux.create(2336,448,"img_porte5") 
+   // groupe_miniJeux.create(3120,320,"img_porte1")   
+    //groupe_miniJeux.create(4576,544,"img_porte2")  
+    //groupe_miniJeux.create(4240,64,"img_porte3")  
+    //groupe_miniJeux.create(4656,336,"img_porte5") 
+    //groupe_miniJeux.create(5584,160 ,"img_porte1")   
+    //groupe_miniJeux.create(4576,480,"img_porte2")  
+    //groupe_miniJeux.create(4912,64,"img_porte3")  
+    //groupe_miniJeux.create(5744,464,"img_porte5") 
+    //groupe_miniJeux.create(6608,560,"img_porte1")   
+    //groupe_miniJeux.create(6032,160,"img_porte2")  
+    //groupe_miniJeux.create(4240,264,"img_porte3")  
+    //groupe_miniJeux.create(1712,352,"img_porte5") 
+
+    // mini jeux alcool
+    // mini jeux champi
+    // mini jeux burger
+    // mini jeux argent 
 
     // la création d'un groupes permet de gérer simultanément les éléments d'une meme famille
     //  Le groupe groupe_plateformes contiendra le sol et deux platesformes sur lesquelles sauter
@@ -207,7 +230,6 @@ export default class selection extends Phaser.Scene {
     //this.physics.add.collider(player, groupe_plateformes);
 
 
-      
     
 
     // définition des tuiles de plateformes qui sont solides
@@ -217,6 +239,8 @@ export default class selection extends Phaser.Scene {
 
     calque_plateformes.setCollisionByProperty({ passerUnSeulSens: true }); 
     calque_background.setCollisionByProperty({ passerUnSeulSens: true }); 
+
+    
 
     // ajout d'une collision entre le joueur et le calque plateformes
     this.physics.add.collider(player, calque_plateformes); 
@@ -268,6 +292,8 @@ export default class selection extends Phaser.Scene {
         this.scene.switch("niveau4");
     }
   }
+
+  
 }
 
 /***********************************************************************/
