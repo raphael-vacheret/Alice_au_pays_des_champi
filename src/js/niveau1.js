@@ -25,21 +25,19 @@ export default class niveau1 extends Phaser.Scene {
   create() {
     console.log("Scène niveau1 créée"); // Vérifier que la scène est bien chargée
 
-    //image.setScale(scale);
     let image = this.add.image(this.scale.width / 2, this.scale.height / 2, "img_bar");
     image.setDisplaySize(this.scale.width, this.scale.height);
-    image.setTint(0x777777); // Applique une teinte plus sombre 0x777777 0x444444
+    image.setTint(0x777777); // Applique une teinte plus sombre
 
-    //this.add.image(400, 300, "img_bar");
-
+    //création du sol marron
     this.groupe_plateformes = this.physics.add.staticGroup();
     this.groupe_plateformes.create(200, 584, "img_rectangle");
     this.groupe_plateformes.create(627, 584, "img_rectangle");
     this.groupe_plateformes.create(1054, 584, "img_rectangle");
 
     this.player = this.physics.add.sprite(100, 450, "img_perso");
-    this.player.setBounce(0.2);
-    this.player.setCollideWorldBounds(true);
+    this.player.setBounce(0.2); //rebond
+    this.player.setCollideWorldBounds(true); //collide avec les bords du monde
 
     this.clavier = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(this.player, this.groupe_plateformes);
@@ -62,7 +60,7 @@ export default class niveau1 extends Phaser.Scene {
     });
     this.time.addEvent({
       delay: 1500, // nouvelle valeur pour random et direction
-      callback: this.aleatoire, // Appelle la fonction aléatoire
+      callback: this.aleatoire, // Appelle la fonction aleatoire
       callbackScope: this,// Pour que la fonction puisse accéder aux variables de la scène
       loop: true, // Répétition indéfinie
     });
@@ -82,13 +80,10 @@ export default class niveau1 extends Phaser.Scene {
    *  GESTION DES INTERATIONS ENTRE  GROUPES ET ELEMENTS *
    ******************************************************/
 
-    //  Collide le joueur avec le groupe bouteilles
-    //this.physics.add.collider(this.player, this.groupe_bouteilles);
-
-    // si le player marche sur un élément de groupe_étoiles (c.-à-d. une bouteille) :
-    // on déclenche la function callback "collecter_etoile" avec en parametres les
-    // deux élement qui se sont superposés : le player, et l'étoile en question
-    // les actions à entreprendre seront écrites dans la fonction ramasserEtoile
+    /* si le player marche sur un élément de groupe_bouteilles (c.-à-d. une bouteille) :
+    on déclenche la function callback "ramasserBouteille" avec en parametres les
+    deux élement qui se sont superposés : le player, et la bouteille en question
+    les actions à entreprendre seront écrites dans la fonction ramasserBouteille*/
     this.physics.add.overlap(this.player, this.groupe_bouteilles, this.ramasserBouteille, null, this);
 
 
@@ -106,8 +101,8 @@ export default class niveau1 extends Phaser.Scene {
 
 
     do {
-      coordX = Phaser.Math.Between(50, largeurScene - 50);
-    } while (this.positionsUtilisees.has(coordX));
+      coordX = Phaser.Math.Between(50, largeurScene - 50); //coordX aléatoire pour les bouteilles
+    } while (this.positionsUtilisees.has(coordX)); //éviter que deux bouteilles soient au même endroit 
 
     this.positionsUtilisees.add(coordX);
 
@@ -128,7 +123,7 @@ export default class niveau1 extends Phaser.Scene {
   /** FONCTION RAMASSERBOUTEILLE
   /***********************************************************************/
 
-  /* la fonction ramasserEtoile est une fonction de callBack :
+  /* la fonction ramasserBouteille est une fonction de callBack :
    * elle est rappelée quand un player rencontre une bouteille de groupe_bouteilles
    * a chaque appel, les parametres désignent le player et la bouteille en question
    */
@@ -176,8 +171,6 @@ export default class niveau1 extends Phaser.Scene {
         this.player.setVelocityX(0);
         this.player.anims.play("anim_face");
       }
-
-
       if (this.clavier.up.isDown && this.player.body.touching.down) {
         this.player.setVelocityY(-330);
       }
@@ -194,8 +187,6 @@ export default class niveau1 extends Phaser.Scene {
         this.player.setVelocityX(0);
         this.player.anims.play("anim_face");
       }
-
-
       if (this.clavier.down.isDown && this.player.body.touching.down) {
         this.player.setVelocityY(-330);
       }
@@ -212,8 +203,6 @@ export default class niveau1 extends Phaser.Scene {
         this.player.setVelocityX(25 * this.direction);
         this.player.anims.play("anim_face");
       }
-
-
       if (this.clavier.up.isDown && this.player.body.touching.down) {
         this.player.setVelocityY(-330);
       }
@@ -227,20 +216,12 @@ export default class niveau1 extends Phaser.Scene {
       this.player.postFX.addBlur(4); // Applique un flou de force 4
       postFXTriggered = true; // Empêche un nouveau déclenchement
     }
-
+    // Gestion de l'écran si le joueur a pris quatre bouteilles d'alcool, fin du jeu
     if (bad_score == 4){
       console.log(bad_score);
       bad_score = 0;
       score = 0;
       this.scene.start("niveau1_fin");
-    }
-
-
-    if (Phaser.Input.Keyboard.JustDown(this.clavier.space)) {
-      if (this.physics.overlap(this.player, this.porte_retour)) {
-        console.log("Changement de scène");// Vérifie que le changement de scène est bien déclenché
-        this.scene.switch("selection");
-      }
     }
   }
 }

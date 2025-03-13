@@ -18,6 +18,7 @@ export default class niveau4 extends Phaser.Scene {
     create() {
         // Réinitialisation de la monnaie entre 50 et 75 à chaque retour dans le niveau
         this.monnaie = Phaser.Math.Between(75, 100);
+        //réinitialise la variable stop à false pour indiquer que le jeu peut continuer normalement
         stop = false;
 
         // Stocke les positions utilisées pour éviter les chevauchements

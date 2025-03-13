@@ -46,7 +46,7 @@ export default class niveau3 extends Phaser.Scene {
 
     // Ajout d'un événement pour faire apparaître les obstacles (burgers et brocolis)
     this.time.addEvent({
-      callback: this.ajouterObstacle, // Appelle la fonction ajouterBouteille
+      callback: this.ajouterObstacle, // Appelle la fonction ajouterObstacle
       callbackScope: this,// Pour que la fonction puisse accéder aux variables de la scène
       delay: 1000, // Une nouvelle bouteille toutes les secondes
     });
@@ -72,15 +72,16 @@ export default class niveau3 extends Phaser.Scene {
         // Ajouter un collider pour détecter les collisions avec le joueur
         this.physics.add.collider(this.player, obstacle, () => {
             if (obstacleType === 0) {
+              if (this.player.displayWidth<50) {
+                this.scene.switch('gameover_burger');
+            }
               //diminuer la largeur du player si brocoli
               this.player.setDisplaySize(this.player.displayWidth * 0.9, this.player.displayHeight);
               this.player.setSize(30,66);
 
             } else {
               if (this.player.displayWidth > 378){
-
-                this.cameras.main.stopFollow();
-
+                this.cameras.main.stopFollow(); //stopper le suivi caméra sur le player
                 let centerX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
                 let centerY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
@@ -89,7 +90,7 @@ export default class niveau3 extends Phaser.Scene {
                   fontSize: "22pt" 
 
               });
-
+              //attendre 3 secondes avant de repartir sur la map principale
               this.time.delayedCall(3000, () => {
                 this.scene.switch("selection");
             }, [], this)
@@ -97,10 +98,9 @@ export default class niveau3 extends Phaser.Scene {
               }
               //augmenter la largeur du player si burger
               this.player.setDisplaySize(this.player.displayWidth * 1.3, this.player.displayHeight);
-              this.player.setSize(30,66);
+              this.player.setSize(30,66); //réduire la taille de la hitbox
             }
             obstacle.destroy();  // Détruire l'obstacle après la collision
-            console.log("Largeur:", this.player.displayWidth);
         }); 
     } 
   }
@@ -120,7 +120,7 @@ export default class niveau3 extends Phaser.Scene {
         this.scene.switch("selection");
       }
     }
-    if (this.player.x >79980) {
+    if (this.player.x >15000) {
       this.scene.switch('gameover_burger');
   }
   }
