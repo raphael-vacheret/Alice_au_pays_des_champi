@@ -82,7 +82,7 @@ export default class niveau2_1_2 extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
         if (this.physics.overlap(this.player, this.porte_retour)) {
           console.log("vrai");
-          this.music.stop();
+          this.sound.stopAll();
           this.scene.switch("niveau2_fin");
         }
         if (this.physics.overlap(this.player, this.porte_3)) {
