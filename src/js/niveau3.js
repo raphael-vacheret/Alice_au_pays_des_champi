@@ -13,6 +13,7 @@ export default class niveau3 extends Phaser.Scene {
     this.load.image("tuile_3_3", "src/assets/niveau3/mcdo.png");
     this.load.image("tuile_4_4", "src/assets/niveau3/piste.jpg");
     this.load.tilemapTiledJSON("map3", "src/assets/niveau3/map_burger.json");
+    this.load.audio('son_burger', 'src/assets/son_burger.mp3');
   }
 
   create() {
@@ -24,6 +25,12 @@ export default class niveau3 extends Phaser.Scene {
     const calque2 = map.createLayer("fond", [tuile1,tuile2,tuile3,tuile4]);
     const calque1 = map.createLayer("legumes", [tuile1,tuile2,tuile3,tuile4]);
     calque2.setCollisionByProperty({ estSolide: true }); 
+
+    this.music = this.sound.add('son_burger', {
+      loop: true,
+      volume: 0.5
+  });
+  this.music.play();
 
     this.player = this.physics.add.sprite(100, 450, "img_perso");
     this.player.refreshBody();
@@ -80,6 +87,7 @@ export default class niveau3 extends Phaser.Scene {
               if (this.player.displayWidth > 378){
 
                 this.cameras.main.stopFollow();
+                this.music.stop();
 
                 let centerX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
                 let centerY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
@@ -121,6 +129,7 @@ export default class niveau3 extends Phaser.Scene {
       }
     }
     if (this.player.x >79980) {
+      this.music.stop();
       this.scene.switch('gameover_burger');
   }
   }

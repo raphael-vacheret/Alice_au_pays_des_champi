@@ -15,6 +15,7 @@ export default class niveau2_1_1 extends Phaser.Scene {
     this.load.image("tuile_6", "src/assets/unicorn-sprite_2.png");
     this.load.image("tuile_7", "src/assets/unicorn-sprite_3.png");
     this.load.tilemapTiledJSON("map", "src/assets/map_champi.json");
+    this.load.audio('son_champi', 'src/assets/son_champi.mp3');
   }
 
   create() {
@@ -32,7 +33,11 @@ export default class niveau2_1_1 extends Phaser.Scene {
     const calque2 = map.createLayer("Calque de Tuiles 2", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
     calque2.setCollisionByProperty({ estSolide: true });
     
-    
+    this.music = this.sound.add('son_champi', {
+      loop: true,
+      volume: 0.5
+  });
+  this.music.play();
 
     // ajout d'un texte distintcif  du niveau
     this.add.text(600, 300, "Combien de consomateurs de champignons sont morts en 2024 ?", {
@@ -92,7 +97,7 @@ export default class niveau2_1_1 extends Phaser.Scene {
       }
       if (this.physics.overlap(this.player, this.porte_perdu)) {
         console.log("faux");
-        
+        this.music.stop();
         this.scene.switch("fin");
       }
     }

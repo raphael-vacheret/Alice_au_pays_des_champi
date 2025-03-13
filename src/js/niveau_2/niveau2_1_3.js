@@ -81,6 +81,7 @@ export default class niveau2_1_3 extends Phaser.Scene {
         }
         if (this.physics.overlap(this.player, this.porte_perdu)) {
           console.log("faux");
+          this.music.stop();
           this.scene.switch("selection");
         }
       }
