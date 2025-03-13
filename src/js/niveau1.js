@@ -75,7 +75,7 @@ export default class niveau1 extends Phaser.Scene {
    ******************************/
 
     //  On définit une zone de texte pour afficher le score en haut a gauche
-    zone_texte_score = this.add.text(16, 16, "Score : 0", {
+    zone_texte_score = this.add.text(16, 16, "Score : "+score, {
       fontSize: "32px", // taille du texte
       fill: "#FFF" // couleur de texte
     });
@@ -156,7 +156,10 @@ export default class niveau1 extends Phaser.Scene {
     une_bouteille.destroy(); //destruction de la bouteille
 
     if (score === 10) {
+      
       this.scene.switch("selection"); //changement de scène
+      score = 0;
+      zone_texte_score.setText("Score : " + score); //changement du score
     }
   }
 
@@ -228,6 +231,8 @@ export default class niveau1 extends Phaser.Scene {
 
     if (bad_score == 4){
       console.log(bad_score);
+      bad_score = 0;
+      score = 0;
       this.scene.start("niveau1_fin");
     }
 
