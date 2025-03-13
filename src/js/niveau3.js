@@ -108,7 +108,8 @@ export default class niveau3 extends Phaser.Scene {
               this.player.setSize(30,66);
             }
             obstacle.destroy();  // Détruire l'obstacle après la collision
-            console.log("Largeur:", this.player.displayWidth);
+            //console.log("Largeur:", this.player.displayWidth);
+            console.log(coordX);
         }); 
     } 
   }
