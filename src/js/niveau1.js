@@ -44,8 +44,6 @@ export default class niveau1 extends Phaser.Scene {
     this.groupe_plateformes.create(627, 584, "img_rectangle");
     this.groupe_plateformes.create(1054, 584, "img_rectangle");
 
-    this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte1");
-
     this.player = this.physics.add.sprite(100, 450, "img_perso");
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
@@ -82,7 +80,7 @@ export default class niveau1 extends Phaser.Scene {
    ******************************/
 
     //  On définit une zone de texte pour afficher le score en haut a gauche
-    zone_texte_score = this.add.text(16, 16, "Score : 0", {
+    zone_texte_score = this.add.text(16, 16, "Score : "+score, {
       fontSize: "32px", // taille du texte
       fill: "#FFF" // couleur de texte
     });
@@ -164,7 +162,11 @@ export default class niveau1 extends Phaser.Scene {
 
     if (score === 10) {
       this.music.stop(); // Arrête la musique
+      
       this.scene.switch("selection"); //changement de scène
+      score = 0;
+      bad_score = 0;
+      zone_texte_score.setText("Score : " + score); //changement du score
     }
   }
 
@@ -232,6 +234,13 @@ export default class niveau1 extends Phaser.Scene {
       }).setOrigin(0.5, 0.5);// centre le texte
       this.player.postFX.addBlur(4); // Applique un flou de force 4
       postFXTriggered = true; // Empêche un nouveau déclenchement
+    }
+
+    if (bad_score == 4){
+      console.log(bad_score);
+      bad_score = 0;
+      score = 0;
+      this.scene.start("niveau1_fin");
     }
 
 

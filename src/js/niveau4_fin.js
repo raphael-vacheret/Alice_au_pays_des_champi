@@ -35,6 +35,6 @@ export default class niveau4_fin extends Phaser.Scene {
     }
 
     fin() {
-        this.scene.start("selection");
+        this.scene.switch("selection");
     }
 }
