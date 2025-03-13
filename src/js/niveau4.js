@@ -79,7 +79,7 @@ export default class niveau4 extends Phaser.Scene {
             zone_texte.setText("argent: " + this.monnaie); // Mise à jour de l'affichage
         
             if (this.monnaie === 0) {
-                this.scene.start("selection"); // Changement de scène si argent = 0
+                this.scene.switch("selection"); // Changement de scène si argent = 0
             } else {
                 this.ajouterJeton(); // Ajoute un jeton qui tombe
             }

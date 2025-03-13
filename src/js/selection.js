@@ -255,14 +255,15 @@ export default class selection extends Phaser.Scene {
       player.setVelocityY(-330);
     }
 
-    if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) {
+    if (Phaser.Input.Keyboard.JustDown(clavier.space) == true) { // pour faire un sorte qu'il soit tp 
+      // quand il touche la "porte" enlever la ligne 258
       if (this.physics.overlap(player, this.porte1))
         this.scene.switch("niveau1");
         //this.porte1.destroy(); // on destroy la porte pour ne pas y retourner
       if (this.physics.overlap(player, this.porte2))
         this.scene.switch("niveau2_1_1");
       if (this.physics.overlap(player, this.porte3))
-        this.scene.switch("niveau3");
+        this.scene.start("niveau3");
       if (this.physics.overlap(player, this.porte4))
         this.scene.switch("niveau4");
     }

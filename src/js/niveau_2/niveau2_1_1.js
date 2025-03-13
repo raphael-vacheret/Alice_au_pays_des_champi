@@ -92,7 +92,7 @@ export default class niveau2_1_1 extends Phaser.Scene {
       }
       if (this.physics.overlap(this.player, this.porte_perdu)) {
         console.log("faux");
-        this.scene.switch("selection");
+        this.scene.switch("niveau2_fin");
       }
     }
   }

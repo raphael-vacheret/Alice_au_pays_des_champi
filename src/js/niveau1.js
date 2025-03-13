@@ -37,8 +37,6 @@ export default class niveau1 extends Phaser.Scene {
     this.groupe_plateformes.create(627, 584, "img_rectangle");
     this.groupe_plateformes.create(1054, 584, "img_rectangle");
 
-    this.porte_retour = this.physics.add.staticSprite(100, 550, "img_porte1");
-
     this.player = this.physics.add.sprite(100, 450, "img_perso");
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
@@ -159,6 +157,7 @@ export default class niveau1 extends Phaser.Scene {
       
       this.scene.switch("selection"); //changement de scène
       score = 0;
+      bad_score = 0;
       zone_texte_score.setText("Score : " + score); //changement du score
     }
   }
