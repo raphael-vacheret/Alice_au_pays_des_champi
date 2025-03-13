@@ -4,7 +4,7 @@ export default class niveau2_fin extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mec_content', 'src/assets/niveau2/mec_content.png');
+        this.load.image('mec_content', 'src/assets/niveau2/mec_content_2.jpg');
     }
 
     create() {
