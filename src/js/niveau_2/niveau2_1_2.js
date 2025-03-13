@@ -82,8 +82,8 @@ export default class niveau2_1_2 extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
         if (this.physics.overlap(this.player, this.porte_retour)) {
           console.log("vrai");
-          
-          this.scene.switch("niveau2_1_3");
+          this.music.stop();
+          this.scene.switch("niveau2_fin");
         }
         if (this.physics.overlap(this.player, this.porte_3)) {
           console.log("vrai");
@@ -91,8 +91,7 @@ export default class niveau2_1_2 extends Phaser.Scene {
         }
         if (this.physics.overlap(this.player, this.porte_perdu)) {
           console.log("faux");
-          this.sound.stopAll();
-          this.scene.switch("niveau2_fin");
+          this.scene.switch("niveau2_1_3");
           
         }
       }
