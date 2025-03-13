@@ -156,7 +156,7 @@ export default class niveau1 extends Phaser.Scene {
     une_bouteille.destroy(); //destruction de la bouteille
 
     if (score === 10) {
-      this.music.stop(); // Arrête la musique
+      this.sound.stopAll();// Arrête la musique
       
       this.scene.switch("selection"); //changement de scène
       score = 0;
@@ -229,6 +229,7 @@ export default class niveau1 extends Phaser.Scene {
       console.log(bad_score);
       bad_score = 0;
       score = 0;
+      this.sound.stopAll();
       this.scene.start("niveau1_fin");
     }
   }

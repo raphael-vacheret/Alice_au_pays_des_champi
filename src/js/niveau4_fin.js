@@ -35,6 +35,7 @@ export default class niveau4_fin extends Phaser.Scene {
     }
 
     fin() {
+        this.sound.stopAll();
         this.scene.switch("selection");
     }
 }

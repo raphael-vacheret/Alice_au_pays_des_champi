@@ -14,9 +14,11 @@ export default class niveau2_2_3 extends Phaser.Scene {
     this.load.image("tuile_6", "src/assets/unicorn-sprite_2.png");
     this.load.image("tuile_7", "src/assets/unicorn-sprite_3.png");
     this.load.tilemapTiledJSON("map", "src/assets/map_champi.json");
+    this.load.audio('son_champi', 'src/assets/son_champi.mp3');
     }
   
     create() {
+      this.music = this.sound.add('son_champi');
       this.groupe_plateformes = this.physics.add.staticGroup();
       const map = this.add.tilemap("map");
     const tuile1 = map.addTilesetImage("arc_en_ciel+_-removebg-preview", "tuile_1");
@@ -82,7 +84,7 @@ export default class niveau2_2_3 extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
         if (this.physics.overlap(this.player, this.porte_retour)) {
           console.log("vrai");
-          this.music.stop();
+          this.sound.stopAll();
           this.scene.switch("niveau2_fin");
         }
         if (this.physics.overlap(this.player, this.porte_3)) {

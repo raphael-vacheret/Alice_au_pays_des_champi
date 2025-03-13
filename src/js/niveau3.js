@@ -127,11 +127,12 @@ export default class niveau3 extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
       if (this.physics.overlap(this.player, this.porte_retour)) {
         console.log("niveau 3 : retour vers selection");
+        this.sound.stopAll();
         this.scene.switch("selection");
       }
     }
     if (this.player.x >15000) {
-      this.music.stop();
+      this.sound.stopAll();
       this.scene.switch('gameover_burger');
   }
   }
