@@ -139,17 +139,18 @@ export default class selection extends Phaser.Scene {
     this.porte1_3 = this.physics.add.staticSprite(3120,320,"img_porte1")   
     this.porte2_3 = this.physics.add.staticSprite(4576,544,"img_porte2")  
     this.porte3_3 = this.physics.add.staticSprite(4240,64,"img_porte3")  
-    this.porte4_3 = this.physics.add.staticSprite(4656,336,"img_porte5") 
-
+    this.porte4_3 = this.physics.add.staticSprite(4912,64,"img_porte5") 
+    
     this.porte1_4 = this.physics.add.staticSprite(5584,160 ,"img_porte1")   
     this.porte2_4 = this.physics.add.staticSprite(4576,480,"img_porte2")  
-    this.porte3_4 = this.physics.add.staticSprite(4912,64,"img_porte3")  
+    this.porte3_4 = this.physics.add.staticSprite(4656,336,"img_porte3")  
     this.porte4_4 = this.physics.add.staticSprite(5744,464,"img_porte5") 
 
     this.porte1_5 = this.physics.add.staticSprite(6608,560,"img_porte1")   
     this.porte2_5 = this.physics.add.staticSprite(6032,160,"img_porte2")  
-    this.porte3_5 = this.physics.add.staticSprite(4240,264,"img_porte3")  
+    this.porte3_5 = this.physics.add.staticSprite(4240,464,"img_porte3")  
     this.porte4_5 = this.physics.add.staticSprite(1712,352,"img_porte5") 
+     
     
     this.porteFin = this.physics.add.staticSprite(6464,368,"img_porteFin")
 
