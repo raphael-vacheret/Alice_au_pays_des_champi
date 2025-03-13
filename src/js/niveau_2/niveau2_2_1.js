@@ -30,7 +30,8 @@ export default class niveau2_2_1 extends Phaser.Scene {
       const calque2 = map.createLayer("Calque de Tuiles 2", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
       const calque3 = map.createLayer("Calque de Tuiles 3", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
       calque2.setCollisionByProperty({ estSolide: true });
-      
+
+
       // ajout d'un texte distintcif  du niveau
     this.add.text(600, 300, "Combien de consomateurs de drogue deviennent addictes ?", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
@@ -85,6 +86,7 @@ export default class niveau2_2_1 extends Phaser.Scene {
         }
         if (this.physics.overlap(this.player, this.porte_3)) {
           console.log("vrai");
+          this.music.stop();
           this.scene.switch("niveau2_fin");
         }
         if (this.physics.overlap(this.player, this.porte_perdu)) {

@@ -20,6 +20,7 @@ export default class niveau1 extends Phaser.Scene {
     this.load.image("img_cristaline", "src/assets/cristaline.png");
     this.load.image("img_jack", "src/assets/jack.png");
     this.load.image("img_rectangle", "src/assets/rectangle.png");
+    this.load.audio("son_alcool", "src/assets/son_alcool.mp3");
   }
 
   create() {
@@ -28,6 +29,12 @@ export default class niveau1 extends Phaser.Scene {
     let image = this.add.image(this.scale.width / 2, this.scale.height / 2, "img_bar");
     image.setDisplaySize(this.scale.width, this.scale.height);
     image.setTint(0x777777); // Applique une teinte plus sombre
+
+    this.music = this.sound.add('son_alcool', {
+      loop: true,
+      volume: 0.5
+  });
+  this.music.play();
 
     //création du sol marron
     this.groupe_plateformes = this.physics.add.staticGroup();
@@ -149,6 +156,7 @@ export default class niveau1 extends Phaser.Scene {
     une_bouteille.destroy(); //destruction de la bouteille
 
     if (score === 10) {
+      this.music.stop(); // Arrête la musique
       
       this.scene.switch("selection"); //changement de scène
       score = 0;

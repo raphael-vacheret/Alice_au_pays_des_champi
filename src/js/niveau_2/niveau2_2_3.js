@@ -30,7 +30,7 @@ export default class niveau2_2_3 extends Phaser.Scene {
     const calque2 = map.createLayer("Calque de Tuiles 2", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
     const calque3 = map.createLayer("Calque de Tuiles 3", [tuile1,tuile2,tuile3,tuile4,tuile5,tuile6,tuile7]);
     calque2.setCollisionByProperty({ estSolide: true });
-      
+
     // ajout d'un texte distintcif  du niveau
     this.add.text(600, 300, "Combien de consomateurs finnisent en hopital ?", {
       fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
@@ -82,6 +82,7 @@ export default class niveau2_2_3 extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(this.clavier.space) == true) {
         if (this.physics.overlap(this.player, this.porte_retour)) {
           console.log("vrai");
+          this.music.stop();
           this.scene.switch("niveau2_fin");
         }
         if (this.physics.overlap(this.player, this.porte_3)) {

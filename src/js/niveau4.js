@@ -13,9 +13,17 @@ export default class niveau4 extends Phaser.Scene {
         this.load.image('argent', 'src/assets/ARGENT.png');
         this.load.spritesheet('timer', 'src/assets/timeur.png', { frameWidth: 129.4, frameHeight: 148 });
         this.load.spritesheet('jeton', 'src/assets/jeton.png', { frameWidth: 116, frameHeight: 98.66 });
+        this.load.audio('son_casino', 'src/assets/son_casino.mp3');
     }
 
     create() {
+
+        this.music = this.sound.add('son_casino', {
+            loop: true,
+            volume: 0.5
+        });
+        this.music.play();
+
         // Réinitialisation de la monnaie entre 50 et 75 à chaque retour dans le niveau
         this.monnaie = Phaser.Math.Between(75, 100);
         //réinitialise la variable stop à false pour indiquer que le jeu peut continuer normalement
@@ -71,6 +79,7 @@ export default class niveau4 extends Phaser.Scene {
                 // Écoute l'événement de fin d'animation
                 temps.on('animationcomplete', (animation) => {
                     if (animation.key === "anime_temps") {
+                        this.music.stop();
                         this.scene.start("niveau4_fin"); // Change de scène quand l'animation se termine
                     }
                 });
@@ -80,7 +89,8 @@ export default class niveau4 extends Phaser.Scene {
             zone_texte.setText("argent: " + this.monnaie); // Mise à jour de l'affichage
         
             if (this.monnaie === 0) {
-                this.scene.switch("selection"); // Changement de scène si argent = 0
+                this.music.stop();
+                this.scene.start("selection"); // Changement de scène si argent = 0
             } else {
                 this.ajouterJeton(); // Ajoute un jeton qui tombe
             }
