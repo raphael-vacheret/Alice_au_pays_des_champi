@@ -39,7 +39,7 @@ var config = {
       debug: false // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
     }
   },
-  scene: [accueil,regles,selection, niveau1, niveau2_1_1, niveau2_1_2,niveau2_1_3,niveau2_2_1,niveau2_2_2,niveau2_2_3,niveau2_3_1,niveau2_3_2,niveau2_3_3, niveau3,niveau4,gameover_burger]
+  scene: [accueil,regles,selection, niveau1, niveau2_1_1, niveau2_1_2,niveau2_1_3,niveau2_2_1,niveau2_2_2,niveau2_2_3,niveau2_3_1,niveau2_3_2,niveau2_3_3, niveau3,niveau4,gameover_burger,niveau1_fin,niveau4_fin] // liste des scènes du jeu  
 };
 
 // création et lancement du jeu
