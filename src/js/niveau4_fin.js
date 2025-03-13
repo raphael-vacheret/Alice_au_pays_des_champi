@@ -5,8 +5,8 @@ export default class niveau4_fin extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('fin_casino', 'src/assets/fin_casino.jpg');
-        this.load.audio('son_casino', 'src/assets/son_casino.mp3');
+        this.load.image('fin_casino', 'src/assets/niveau4/fin_casino.jpg');
+        this.load.audio('son_casino', 'src/assets/niveau4/son_casino.mp3');
     }
 
     create() {

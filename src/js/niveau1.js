@@ -16,11 +16,11 @@ export default class niveau1 extends Phaser.Scene {
   }
   // import des assets
   preload() {
-    this.load.image("img_bar", "src/assets/bar2.png");
-    this.load.image("img_cristaline", "src/assets/cristaline.png");
-    this.load.image("img_jack", "src/assets/jack.png");
-    this.load.image("img_rectangle", "src/assets/rectangle.png");
-    this.load.audio("son_alcool", "src/assets/son_alcool.mp3");
+    this.load.image("img_bar", "src/assets/niveau1/bar2.png");
+    this.load.image("img_cristaline", "src/assets/niveau1/cristaline.png");
+    this.load.image("img_jack", "src/assets/niveau1/jack.png");
+    this.load.image("img_rectangle", "src/assets/niveau1/rectangle.png");
+    this.load.audio("son_alcool", "src/assets/niveau1/son_alcool.mp3");
   }
 
   create() {

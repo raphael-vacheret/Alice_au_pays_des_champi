@@ -29,26 +29,26 @@ export default class selection extends Phaser.Scene {
     this.load.image("img_ciel", "src/assets/sky.png");
     this.load.image("img_plateforme", "src/assets/platform.png");
 
-    this.load.spritesheet("img_perso", "src/assets/perso1.png", {
+    this.load.spritesheet("img_perso", "src/assets/selection/perso1.png", {
       frameWidth: 46,
       frameHeight: 66
     });
 
     
-    this.load.image("img_porte1", "src/assets/alcool_porte.png");
-    this.load.image("img_porte2", "src/assets/champi_porte.png");
-    this.load.image("img_porte3", "src/assets/burger_porte.png");
-    this.load.image("img_porte4", "src/assets/porte_rose.png");
-    this.load.image("img_porte5", "src/assets/casino.png");
+    this.load.image("img_porte1", "src/assets/selection/alcool_porte.png");
+    this.load.image("img_porte2", "src/assets/selection/champi_porte.png");
+    this.load.image("img_porte3", "src/assets/selection/burger_porte.png");
+    this.load.image("img_porte4", "src/assets/selection/porte_rose.png");
+    this.load.image("img_porte5", "src/assets/selection/casino.png");
 
     // chargement tuiles de jeu
-    this.load.image("Phaser_tuilesdejeu1", "src/assets/Tileset.png");
-    this.load.image("Phaser_tuilesdejeu2", "src/assets/Tileset2.png");
-    this.load.image("Phaser_tuilesdejeu3", "src/assets/GUI.png");
-    this.load.image("Phaser_traps", "src/assets/Traps_1-removebg-preview.png");
+    this.load.image("Phaser_tuilesdejeu1", "src/assets/selection/Tileset.png");
+    this.load.image("Phaser_tuilesdejeu2", "src/assets/selection/Tileset2.png");
+    this.load.image("Phaser_tuilesdejeu3", "src/assets/selection/GUI.png");
+    this.load.image("Phaser_traps", "src/assets/selection/Traps_1-removebg-preview.png");
 
     // chargement de la carte
-    this.load.tilemapTiledJSON("carte", "src/assets/mapJeu.json"); 
+    this.load.tilemapTiledJSON("carte", "src/assets/selection/mapJeu.json"); 
   }
 
   /***********************************************************************/

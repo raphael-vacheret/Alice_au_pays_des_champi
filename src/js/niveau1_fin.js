@@ -4,7 +4,7 @@ export default class niveau1_fin extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('fin_bouteille', 'src/assets/bouteille_fin.jpg');
+        this.load.image('fin_bouteille', 'src/assets/niveau1/bouteille_fin.jpg');
     }
 
     create() {

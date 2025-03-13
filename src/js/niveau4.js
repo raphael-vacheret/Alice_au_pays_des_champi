@@ -9,11 +9,11 @@ export default class niveau4 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('fond_casino', 'src/assets/theme_casino.jpg');
-        this.load.image('argent', 'src/assets/ARGENT.png');
-        this.load.spritesheet('timer', 'src/assets/timeur.png', { frameWidth: 129.4, frameHeight: 148 });
-        this.load.spritesheet('jeton', 'src/assets/jeton.png', { frameWidth: 116, frameHeight: 98.66 });
-        this.load.audio('son_casino', 'src/assets/son_casino.mp3');
+        this.load.image('fond_casino', 'src/assets/niveau4/theme_casino.jpg');
+        this.load.image('argent', 'src/assets/niveau4/ARGENT.png');
+        this.load.spritesheet('timer', 'src/assets/niveau4/timeur.png', { frameWidth: 129.4, frameHeight: 148 });
+        this.load.spritesheet('jeton', 'src/assets/niveau4/jeton.png', { frameWidth: 116, frameHeight: 98.66 });
+        this.load.audio('son_casino', 'src/assets/niveau4/son_casino.mp3');
     }
 
     create() {

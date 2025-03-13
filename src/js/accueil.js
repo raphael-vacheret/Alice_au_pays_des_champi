@@ -4,10 +4,10 @@ export default class accueil extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('fond_accueil', 'src/assets/page_accueil.png');
-        this.load.image('bouton_play', 'src/assets/bouton.png');
-        this.load.image('bouton_regles', 'src/assets/logo_2.png');
-        this.load.image('titre', 'src/assets/titre2.png');
+        this.load.image('fond_accueil', 'src/assets/accueil/page_accueil.png');
+        this.load.image('bouton_play', 'src/assets/accueil/bouton.png');
+        this.load.image('bouton_regles', 'src/assets/accueil/logo_2.png');
+        this.load.image('titre', 'src/assets/accueil/titre2.png');
         
     }
 
